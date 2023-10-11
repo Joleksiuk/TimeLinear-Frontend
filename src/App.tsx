@@ -15,6 +15,7 @@ export default function App() {
           <Route path="timeline" element={<TimelinePage />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
+          <Route path="timeline" element={<TimelinePage />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
