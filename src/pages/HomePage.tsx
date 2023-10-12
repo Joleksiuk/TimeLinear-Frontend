@@ -1,10 +1,10 @@
-import Logo from "../Components/logo/Logo";
+import Logo from '../Components/logo/Logo'
 
-export default function HomePage () {
+export default function HomePage() {
     return (
         <div>
             Homepage
-            <Logo/>
+            <Logo />
         </div>
     )
-};
+}
