@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
 
 const drawerWidth: number = 240;
 
@@ -52,6 +53,12 @@ export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
       },
     }),
   );
+
+  export const DashboardContainer = styled(Box)(
+    ()=>({
+      display: 'flex' 
+    })
+  )
 
 
   
