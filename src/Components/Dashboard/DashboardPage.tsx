@@ -1,6 +1,6 @@
 import { Box, Toolbar, Container } from '@mui/material'
 import { Outlet } from 'react-router-dom'
-import { Colors } from '@timelinear/constants'
+import { Colors } from '@/constants/Colors'
 
 export default function DashboardPage() {
     return (
