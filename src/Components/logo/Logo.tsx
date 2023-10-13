@@ -1,9 +1,9 @@
-import './Logo.css';
+import './Logo.css'
 
-export default function Logo () {
-    return(
-        <div className = "logo-background">
-            <div className = "logo-inner-background">
+export default function Logo() {
+    return (
+        <div className="logo-background">
+            <div className="logo-inner-background">
                 <div className="circle-container">
                     <div className="circle-group">
                         <div className="logo-circle-background-first"></div>
@@ -15,7 +15,7 @@ export default function Logo () {
                     </div>
                 </div>
                 <div className="logo-circle-inner-background">
-                    <div className ="pointer-circle">
+                    <div className="pointer-circle">
                         <div className="pointer-inner-circle"></div>
                     </div>
                 </div>

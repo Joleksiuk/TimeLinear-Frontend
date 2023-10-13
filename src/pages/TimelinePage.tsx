@@ -1,3 +1,5 @@
+import Timeline from '@/Components/Timeline/Timeline'
+
 export default function TimelinePage() {
-    return <h1>TimelinePage</h1>
+    return <Timeline />
 }

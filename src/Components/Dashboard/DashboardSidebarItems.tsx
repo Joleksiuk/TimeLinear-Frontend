@@ -1,45 +1,27 @@
-import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import React from "react";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
+import React from 'react'
+import Link from '@mui/material/Link'
+import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import { useNavigate } from 'react-router-dom'
 
-export default function DashboardSidebarItems(){
+export default function DashboardSidebarItems() {
+    const navigate = useNavigate()
+
     return (
         <React.Fragment>
-          <ListItemButton>
-            <ListItemIcon>
-              <DashboardIcon  style={{fill: "white"}} />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <ShoppingCartIcon  style={{fill: "white"}}/>
-            </ListItemIcon>
-            <ListItemText primary="Orders" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <PeopleIcon  style={{fill: "white"}}/>
-            </ListItemIcon>
-            <ListItemText primary="Customers" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <BarChartIcon  style={{fill: "white"}}/>
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <LayersIcon  style={{fill: "white"}} />
-            </ListItemIcon>
-            <ListItemText primary="Integrations" />
-          </ListItemButton>
+            <ListItemButton onClick={() => navigate('/calendar')}>
+                <ListItemIcon>
+                    <CalendarMonthIcon />
+                </ListItemIcon>
+                <ListItemText primary="Calendar" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate('/timeline')}>
+                <ListItemIcon>
+                    <AccessTimeIcon />
+                </ListItemIcon>
+                <ListItemText primary="Timeline" />
+            </ListItemButton>
         </React.Fragment>
-      );
-      
+    )
 }
