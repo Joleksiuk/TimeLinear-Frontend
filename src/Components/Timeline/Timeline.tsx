@@ -7,7 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { ContainerStyled, NameAndDateContainer } from './Timeline.styled'
 import { TimelineEvent } from './TimelineEvent'
-import TimelineChart from './TimelineChart'
+import TimelineChart from './TimelineChart/TimelineChart'
 
 export default function Timeline() {
     const [date, setDate] = React.useState<Dayjs | null>(dayjs(Date.now()))
@@ -62,7 +62,14 @@ export default function Timeline() {
                     />
                 </ContainerStyled>
             </form>
-            <TimelineChart events={timelineItems} />
+            <TimelineChart
+                rootCircleRadius={100}
+                branchCircleRadius={40}
+                rootMargin={50}
+                branchWidth={20}
+                branchHeight={200}
+                events={timelineItems}
+            />
         </div>
     )
 }
