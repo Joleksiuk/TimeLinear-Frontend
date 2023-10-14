@@ -7,58 +7,47 @@ import {
     ElementsStyled,
     InnerCircleRootStyled,
 } from './TimelineChart.styled'
+import { TimelineChartProvider } from './TimelineChartProvider'
+import { Parameters } from './TimelineChartProvider'
 
 type Props = {
     events: TimelineEvent[]
-    rootCircleRadius: number
-    branchCircleRadius: number
-    branchWidth: number
-    branchHeight: number
-    rootMargin: number
+    parameters: Parameters
 }
 
-export default function TimelineChart({
-    events,
-    rootCircleRadius,
-    branchCircleRadius,
-    branchWidth,
-    branchHeight,
-    rootMargin,
-}: Props) {
+export default function TimelineChart({ events, parameters }: Props) {
     return (
-        <ElementsStyled>
-            <BranchContainerStyled>
-                <BranchStyled
-                    width={branchWidth}
-                    height={branchHeight}
-                    display={false}
-                />
-                <CircleRootStyled
-                    width={rootCircleRadius}
-                    height={rootCircleRadius}
-                    display={true}
-                >
-                    <InnerCircleRootStyled
-                        width={rootCircleRadius * 0.32}
-                        height={rootCircleRadius * 0.32}
+        <TimelineChartProvider initialParams={parameters}>
+            <ElementsStyled>
+                <BranchContainerStyled>
+                    <BranchStyled
+                        width={parameters.branchWidth}
+                        height={parameters.branchHeight}
+                        display={false}
                     />
-                </CircleRootStyled>
-                <BranchStyled
-                    width={branchWidth}
-                    height={branchHeight}
-                    display={false}
-                />
-            </BranchContainerStyled>
-            {events.map((ev, index) => (
-                <TimelineBranch
-                    direction={index % 2 === 0 ? 'right' : 'left'}
-                    timelineEvent={ev}
-                    branchWidth={branchWidth}
-                    branchHeight={branchHeight}
-                    branchCircleRadius={branchCircleRadius}
-                    rootMargin={rootMargin}
-                />
-            ))}
-        </ElementsStyled>
+                    <CircleRootStyled
+                        width={parameters.rootCircleRadius}
+                        height={parameters.rootCircleRadius}
+                        display={true}
+                    >
+                        <InnerCircleRootStyled
+                            width={parameters.rootCircleRadius * 0.32}
+                            height={parameters.rootCircleRadius * 0.32}
+                        />
+                    </CircleRootStyled>
+                    <BranchStyled
+                        width={parameters.branchWidth}
+                        height={parameters.branchHeight}
+                        display={false}
+                    />
+                </BranchContainerStyled>
+                {events.map((ev, index) => (
+                    <TimelineBranch
+                        direction={index % 2 === 0 ? 'right' : 'left'}
+                        timelineEvent={ev}
+                    />
+                ))}
+            </ElementsStyled>
+        </TimelineChartProvider>
     )
 }

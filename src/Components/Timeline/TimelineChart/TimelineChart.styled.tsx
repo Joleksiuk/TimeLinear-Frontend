@@ -64,7 +64,7 @@ export const LineStyled = styled.div<LineProps>`
     width: ${(props) => props.width}px;
     height: ${(props) => props.height}px;
     border-radius: 10px;
-    background-image: linear-gradient(200deg, #5b7add, #5b7add);
+    background-image: linear-gradient(200deg, #7477f3, #5b7add);
     margin-top: -${(props) => props.rootMargin}px;
 `
 export type BranchProps = {
@@ -89,16 +89,19 @@ export const EventDataContainer = styled.div<BaseProps>`
     padding-left: 30px;
     padding-right: 30px;
 `
+type TextProps = {
+    textFontSize: number
+} & BaseProps
 
-export const DateStyled = styled.div<BaseProps>`
+export const DateStyled = styled.div<TextProps>`
     color: ${(props) => (props.display ? '#ffffff' : '#121529')};
-    font-size: 25px;
+    font-size: ${(props) => props.textFontSize * 1.25}px;
 `
-export const EventNameStyled = styled.div<BaseProps>`
+export const EventNameStyled = styled.div<TextProps>`
     color: ${(props) => (props.display ? '#4c58aa' : '#121529')};
-    font-size: 30px;
+    font-size: ${(props) => props.textFontSize * 1.5}px;
 `
-export const DescriptionStyled = styled.div<BaseProps>`
+export const DescriptionStyled = styled.div<TextProps>`
     color: ${(props) => (props.display ? '#5d6074' : '#121529')};
-    font-size: 20px;
+    font-size: ${(props) => props.textFontSize}px;
 `

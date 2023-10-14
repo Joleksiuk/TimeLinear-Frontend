@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import SignIn from './pages/SingIn'
 import Dashboard from './Components/Dashboard/Dashboard'
 import CalendarPage from './pages/CalendarPage'
+import TimelinesListPage from './pages/TimelinesListPage'
 
 export default function App() {
     return (
@@ -18,6 +19,10 @@ export default function App() {
                     <Route path="signin" element={<SignIn />} />
                     <Route path="timeline" element={<TimelinePage />} />
                     <Route path="calendar" element={<CalendarPage />} />
+                    <Route
+                        path="timelinesList"
+                        element={<TimelinesListPage />}
+                    />
                     <Route path="*" element={<NoPage />} />
                 </Route>
             </Routes>

@@ -5,6 +5,7 @@ import {
     EventDataContainer,
     EventNameStyled,
 } from './TimelineChart.styled'
+import { useTimelineChartContext } from './TimelineChartProvider'
 
 type Props = {
     timelineEvent: TimelineEvent
@@ -12,14 +13,27 @@ type Props = {
 }
 
 export default function TimelineData({ timelineEvent, display }: Props) {
+    const { parameters } = useTimelineChartContext()
+
     return (
         <EventDataContainer display={display}>
-            <EventNameStyled display={display}>
-                {timelineEvent.date?.day()}- {timelineEvent.date?.month()}-
+            <EventNameStyled
+                display={display}
+                textFontSize={parameters.dataFontSize}
+            >
+                {timelineEvent.date?.day()}-{timelineEvent.date?.month()}-
                 {timelineEvent.date?.year()}
             </EventNameStyled>
-            <DateStyled display={display}>{timelineEvent.eventName}</DateStyled>
-            <DescriptionStyled display={display}>
+            <DateStyled
+                textFontSize={parameters.dataFontSize}
+                display={display}
+            >
+                {timelineEvent.eventName}
+            </DateStyled>
+            <DescriptionStyled
+                textFontSize={parameters.dataFontSize}
+                display={display}
+            >
                 {timelineEvent.description}
             </DescriptionStyled>
         </EventDataContainer>

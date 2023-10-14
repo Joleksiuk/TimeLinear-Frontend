@@ -3,45 +3,39 @@ import {
     CircleRootStyled,
     InnerCircleRootStyled,
 } from './TimelineChart.styled'
+import { useTimelineChartContext } from './TimelineChartProvider'
 
 type Props = {
     display: boolean
     direction: string
-    branchWidth: number
-    branchHeight: number
-    branchCircleRadius: number
 }
 
-export default function TimelineBranchCircle({
-    display,
-    direction,
-    branchWidth,
-    branchHeight,
-    branchCircleRadius,
-}: Props) {
+export default function TimelineBranchCircle({ display, direction }: Props) {
+    const { parameters } = useTimelineChartContext()
+
     return (
         <>
             {direction === 'right' && (
                 <BranchStyled
-                    width={branchHeight}
-                    height={branchWidth}
+                    width={parameters.branchHeight}
+                    height={parameters.branchWidth}
                     display={display}
                 />
             )}
             <CircleRootStyled
-                width={branchCircleRadius}
-                height={branchCircleRadius}
+                width={parameters.branchCircleRadius}
+                height={parameters.branchCircleRadius}
                 display={display}
             >
                 <InnerCircleRootStyled
-                    width={branchCircleRadius * 0.5}
-                    height={branchCircleRadius * 0.5}
+                    width={parameters.branchCircleRadius * 0.5}
+                    height={parameters.branchCircleRadius * 0.5}
                 />
             </CircleRootStyled>
             {direction === 'left' && (
                 <BranchStyled
-                    width={branchHeight}
-                    height={branchWidth}
+                    width={parameters.branchHeight}
+                    height={parameters.branchWidth}
                     display={display}
                 />
             )}

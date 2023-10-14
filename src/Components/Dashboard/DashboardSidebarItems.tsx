@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from '@mui/material/Link'
+import ViewListIcon from '@mui/icons-material/ViewList'
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
@@ -20,7 +20,13 @@ export default function DashboardSidebarItems() {
                 <ListItemIcon>
                     <AccessTimeIcon />
                 </ListItemIcon>
-                <ListItemText primary="Timeline" />
+                <ListItemText primary="Create timeline" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate('/timelinesList')}>
+                <ListItemIcon>
+                    <ViewListIcon />
+                </ListItemIcon>
+                <ListItemText primary="My timelines" />
             </ListItemButton>
         </React.Fragment>
     )

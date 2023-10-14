@@ -9,6 +9,14 @@ import { ContainerStyled, NameAndDateContainer } from './Timeline.styled'
 import { TimelineEvent } from './TimelineEvent'
 import TimelineChart from './TimelineChart/TimelineChart'
 
+const timelineChartParameters = {
+    rootCircleRadius: 100,
+    branchCircleRadius: 40,
+    rootMargin: 50,
+    branchWidth: 20,
+    branchHeight: 200,
+    dataFontSize: 30,
+}
 export default function Timeline() {
     const [date, setDate] = React.useState<Dayjs | null>(dayjs(Date.now()))
     const [eventName, setEventName] = useState('')
@@ -63,11 +71,7 @@ export default function Timeline() {
                 </ContainerStyled>
             </form>
             <TimelineChart
-                rootCircleRadius={100}
-                branchCircleRadius={40}
-                rootMargin={50}
-                branchWidth={20}
-                branchHeight={200}
+                parameters={timelineChartParameters}
                 events={timelineItems}
             />
         </div>
