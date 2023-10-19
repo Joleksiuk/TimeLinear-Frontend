@@ -33,7 +33,6 @@ export default function Timeline() {
         setTimelineItems(dupa)
         setEventName('')
         setDescription('')
-        console.log(newEvent)
     }
 
     return (

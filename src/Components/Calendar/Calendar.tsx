@@ -1,5 +1,5 @@
-import React from 'react'
-import { BodyCell, CalendarTable, HeaderCell } from './Calendar.styled'
+import React, { useEffect, useState } from 'react'
+import { BodyCell, CalendarTable, HeaderCellStyled } from './Calendar.styled'
 
 const daysOfWeek = [
     'Sunday',
@@ -11,32 +11,45 @@ const daysOfWeek = [
     'Saturday',
 ]
 
+type BodyCellData = {
+    isMarked: boolean
+}
+
 export default function Calendar() {
     const today = new Date()
     const currentYear = today.getFullYear()
     const currentMonth = today.getMonth()
-
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
 
     const hoursOfDay = Array.from({ length: 24 }, (_, i) => `${i}:00`)
+    const [calendar, setCalendar] = useState<Array<Array<BodyCellData>>>([])
 
-    const calendar = []
-
-    for (let hour = 0; hour < 24; hour++) {
-        const row = []
-        for (let day = 1; day <= daysInMonth; day++) {
-            row.push(<BodyCell key={day} />)
-        }
-        calendar.push(row)
+    function handleBodyCellClick(rowIndex: number, cellIndex: number) {
+        const updatedCalendar = [...calendar]
+        updatedCalendar[rowIndex][cellIndex].isMarked =
+            !updatedCalendar[rowIndex][cellIndex].isMarked
+        setCalendar(updatedCalendar)
     }
+
+    useEffect(() => {
+        const tempCalendar = []
+        for (let hour = 0; hour < 24; hour++) {
+            const row: Array<BodyCellData> = []
+            for (let day = 1; day <= daysInMonth; day++) {
+                row.push({ isMarked: false })
+            }
+            tempCalendar.push(row)
+        }
+        setCalendar(tempCalendar)
+    }, [])
 
     return (
         <CalendarTable>
             <thead>
                 <tr>
-                    <HeaderCell></HeaderCell>
+                    <HeaderCellStyled></HeaderCellStyled>
                     {Array.from({ length: daysInMonth }, (_, i) => (
-                        <HeaderCell key={i + 1}>
+                        <HeaderCellStyled key={i + 1}>
                             {i + 1}
                             <br />
                             {daysOfWeek[
@@ -46,15 +59,25 @@ export default function Calendar() {
                                     i + 1
                                 ).getDay()
                             ].substring(0, 3)}
-                        </HeaderCell>
+                        </HeaderCellStyled>
                     ))}
                 </tr>
             </thead>
             <tbody>
-                {calendar.map((hourRow, index) => (
-                    <tr key={index}>
-                        <HeaderCell>{hoursOfDay[index]}</HeaderCell>
-                        {hourRow}
+                {calendar.map((row: Array<BodyCellData>, rowIndex: number) => (
+                    <tr key={rowIndex}>
+                        <HeaderCellStyled>
+                            {hoursOfDay[rowIndex]}
+                        </HeaderCellStyled>
+                        {row.map((cell: BodyCellData, cellIndex: number) => (
+                            <BodyCell
+                                key={cellIndex}
+                                isMarked={cell.isMarked}
+                                onClick={() =>
+                                    handleBodyCellClick(rowIndex, cellIndex)
+                                }
+                            />
+                        ))}
                     </tr>
                 ))}
             </tbody>

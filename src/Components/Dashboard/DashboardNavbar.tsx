@@ -1,7 +1,10 @@
-import { Toolbar, IconButton, Typography, Badge, Link } from '@mui/material'
+import { Toolbar, IconButton, Typography, Link } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { AppBar } from './Dashboard.styled'
+import LoggedAccountDropdown from '../menus/LoggedAccountDropdown'
+import { getCurrentUser } from '@/services/AuthService'
+import NotLoggedAccountDropdown from '../menus/NotLoggedAccountDropdown'
+import { useEffect, useState } from 'react'
 
 type Props = {
     toggleDrawer: () => void
@@ -39,13 +42,11 @@ export default function DashboardNavbar({ toggleDrawer, open }: Props) {
                         Timelinear
                     </Link>
                 </Typography>
-                <IconButton color="inherit">
-                    <Link color="inherit" href="signin">
-                        <Badge color="secondary">
-                            <AccountCircleIcon />
-                        </Badge>
-                    </Link>
-                </IconButton>
+                {getCurrentUser() ? (
+                    <LoggedAccountDropdown />
+                ) : (
+                    <NotLoggedAccountDropdown />
+                )}
             </Toolbar>
         </AppBar>
     )

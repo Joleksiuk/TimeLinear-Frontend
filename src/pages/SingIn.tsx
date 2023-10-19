@@ -1,24 +1,35 @@
 import * as React from 'react'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
+import PasswordField from '@/Components/formFields/PasswordField'
+import EmailField from '@/Components/formFields/EmailField'
+import { login } from '@/services/AuthService'
+import { useState } from 'react'
+import { Alert, AlertTitle } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignIn() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const [showLoginError, setShowLoginError] = useState(false)
+    const navigate = useNavigate()
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget)
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        })
+        try {
+            await login({
+                email: data.get('email'),
+                password: data.get('password'),
+            })
+        } catch (error) {
+            setShowLoginError(true)
+        }
+        navigate('/')
     }
 
     return (
@@ -37,36 +48,20 @@ export default function SignIn() {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
+                {showLoginError && (
+                    <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        Could not log in - Email does not match the password
+                    </Alert>
+                )}
                 <Box
                     component="form"
                     onSubmit={handleSubmit}
                     noValidate
                     sx={{ mt: 1 }}
                 >
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
+                    <EmailField />
+                    <PasswordField type="password" label="Password" />
                     <Button
                         type="submit"
                         fullWidth

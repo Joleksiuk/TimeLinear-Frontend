@@ -93,15 +93,21 @@ type TextProps = {
     textFontSize: number
 } & BaseProps
 
-export const DateStyled = styled.div<TextProps>`
+export const TextBase = styled.div<TextProps>`
+    user-select: ${(props) => (props.display ? 'text' : 'none')};
+    -webkit-user-select: ${(props) => (props.display ? 'text' : 'none')};
+    -ms-user-select: ${(props) => (props.display ? 'text' : 'none')};
+`
+
+export const DateStyled = styled(TextBase)<TextProps>`
     color: ${(props) => (props.display ? '#ffffff' : '#121529')};
     font-size: ${(props) => props.textFontSize * 1.25}px;
 `
-export const EventNameStyled = styled.div<TextProps>`
+export const EventNameStyled = styled(TextBase)<TextProps>`
     color: ${(props) => (props.display ? '#4c58aa' : '#121529')};
     font-size: ${(props) => props.textFontSize * 1.5}px;
 `
-export const DescriptionStyled = styled.div<TextProps>`
+export const DescriptionStyled = styled(TextBase)<TextProps>`
     color: ${(props) => (props.display ? '#5d6074' : '#121529')};
     font-size: ${(props) => props.textFontSize}px;
 `
