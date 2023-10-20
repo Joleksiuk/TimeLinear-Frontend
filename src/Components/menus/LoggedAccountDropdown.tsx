@@ -9,9 +9,9 @@ import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
-import { useEffect } from 'react'
-import { getCurrentUser } from '@/services/AuthService'
+import { getCurrentUser, logout } from '@/services/AuthService'
 import { Typography } from '@mui/material'
+import { homepageURL } from '@/constants/Variables'
 
 export default function LoggedAccountDropdown() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -21,6 +21,11 @@ export default function LoggedAccountDropdown() {
     }
     const handleClose = () => {
         setAnchorEl(null)
+    }
+
+    const handleLogout = () => {
+        logout()
+        window.location.href = homepageURL + '/signIn'
     }
 
     return (
@@ -89,14 +94,7 @@ export default function LoggedAccountDropdown() {
                     <Avatar /> Profile
                 </MenuItem>
                 <Divider />
-
-                <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <Settings fontSize="small" />
-                    </ListItemIcon>
-                    Settings
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>

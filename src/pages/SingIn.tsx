@@ -13,6 +13,7 @@ import { login } from '@/services/AuthService'
 import { useState } from 'react'
 import { Alert, AlertTitle } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { homepageURL } from '@/constants/Variables'
 
 export default function SignIn() {
     const [showLoginError, setShowLoginError] = useState(false)
@@ -26,10 +27,10 @@ export default function SignIn() {
                 email: data.get('email'),
                 password: data.get('password'),
             })
+            window.location.href = homepageURL
         } catch (error) {
             setShowLoginError(true)
         }
-        navigate('/')
     }
 
     return (

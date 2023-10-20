@@ -4,7 +4,6 @@ import { AppBar } from './Dashboard.styled'
 import LoggedAccountDropdown from '../menus/LoggedAccountDropdown'
 import { getCurrentUser } from '@/services/AuthService'
 import NotLoggedAccountDropdown from '../menus/NotLoggedAccountDropdown'
-import { useEffect, useState } from 'react'
 
 type Props = {
     toggleDrawer: () => void
@@ -42,7 +41,7 @@ export default function DashboardNavbar({ toggleDrawer, open }: Props) {
                         Timelinear
                     </Link>
                 </Typography>
-                {getCurrentUser() ? (
+                {getCurrentUser() !== null ? (
                     <LoggedAccountDropdown />
                 ) : (
                     <NotLoggedAccountDropdown />

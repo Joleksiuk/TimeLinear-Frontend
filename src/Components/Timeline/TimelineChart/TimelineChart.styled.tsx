@@ -110,4 +110,6 @@ export const EventNameStyled = styled(TextBase)<TextProps>`
 export const DescriptionStyled = styled(TextBase)<TextProps>`
     color: ${(props) => (props.display ? '#5d6074' : '#121529')};
     font-size: ${(props) => props.textFontSize}px;
+    max-width: 500px;
+    word-wrap: break-word; /* Wrap long words onto the next line */
 `

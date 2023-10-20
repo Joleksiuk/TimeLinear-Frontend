@@ -10,11 +10,10 @@ import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
 import { getCurrentUser } from '@/services/AuthService'
 import { Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { homepageURL } from '@/constants/Variables'
 
 export default function NotLoggedAccountDropdown() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-    const navigate = useNavigate()
 
     const open = Boolean(anchorEl)
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -25,11 +24,11 @@ export default function NotLoggedAccountDropdown() {
     }
 
     const handleClickSignUp = () => {
-        navigate('/signUp')
+        window.location.href = homepageURL + '/signUp'
         handleClose()
     }
     const handleClickSignIn = () => {
-        navigate('/signIn')
+        window.location.href = homepageURL + '/signIn'
         handleClose()
     }
 

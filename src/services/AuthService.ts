@@ -2,7 +2,6 @@ import { SIGN_IN_URL, SIGN_UP_URL } from './APIConstants'
 import { request } from './API'
 import { SignUpRequest } from '@/models/SignUp'
 import { SignInRequest, SignInResponse } from '@/models/SignIn'
-import { AxiosResponse } from 'axios'
 
 export const register = (username: string, email: string, password: string) => {
     const data: SignUpRequest = {
