@@ -17,6 +17,7 @@ export default function TimelineBranchCircle({ display, direction }: Props) {
         <>
             {direction === 'right' && (
                 <BranchStyled
+                    direction={direction}
                     width={parameters.branchHeight}
                     height={parameters.branchWidth}
                     display={display}
@@ -34,6 +35,7 @@ export default function TimelineBranchCircle({ display, direction }: Props) {
             </CircleRootStyled>
             {direction === 'left' && (
                 <BranchStyled
+                    direction={direction}
                     width={parameters.branchHeight}
                     height={parameters.branchWidth}
                     display={display}

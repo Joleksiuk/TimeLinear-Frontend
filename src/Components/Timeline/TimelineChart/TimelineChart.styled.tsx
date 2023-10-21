@@ -25,11 +25,12 @@ export const CircleRootStyled = styled.div<CircleProps>`
     height: ${(props) => props.height}px;
     border-radius: ${(props) => props.height}px;
     background-image: ${(props) =>
-        props.display && 'linear-gradient(200deg, #5b7add, #5b7add)'};
+        props.display && 'linear-gradient(200deg, #a33fca, #5b7add)'};
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 4;
 `
 export type InnerCircleProps = {
     width: number
@@ -42,16 +43,12 @@ export const InnerCircleRootStyled = styled.div<InnerCircleProps>`
     border-radius: ${(props) => props.width}px;
     background-color: #121529;
 `
-export type LineProps = {
-    width: number
-    height: number
-    rootMargin: number
-} & BaseProps
 
 export const ElementsStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 `
 
 export const BranchContainerStyled = styled.div`
@@ -60,25 +57,44 @@ export const BranchContainerStyled = styled.div`
     align-items: center;
 `
 
+export type LineProps = {
+    width: number
+    height: number
+    rootMargin: number
+}
+
 export const LineStyled = styled.div<LineProps>`
-    width: ${(props) => props.width}px;
-    height: ${(props) => props.height}px;
+    width: ${(props) => props.width * 2}px;
     border-radius: 10px;
-    background-image: linear-gradient(200deg, #7477f3, #5b7add);
-    margin-top: -${(props) => props.rootMargin}px;
+    background-image: linear-gradient(200deg, #5b7add, #5b7add);
+    position: absolute;
+    margin-top: ${(props) => props.rootMargin - 10}px;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
 `
+
 export type BranchProps = {
     width: number
     height: number
+    direction: 'left' | 'right'
 } & BaseProps
 
 export const BranchStyled = styled.div<BranchProps>`
     width: ${(props) => props.width}px;
     height: ${(props) => props.height}px;
-    border-radius: 10px;
     margin: -10px;
-    background-image: ${(props) =>
-        props.display && 'linear-gradient(200deg, #5b7add, #5b7add)'};
+    background-image: ${(props) => {
+        if (!props.display) {
+            return
+        }
+        if (props.direction === 'right') {
+            return 'linear-gradient(200deg, #a33fca, #5b7add)'
+        }
+        if (props.direction === 'left') {
+            return 'linear-gradient(200deg, #5b7add, #a33fca)'
+        }
+    }};
     position: relative;
 `
 
@@ -97,8 +113,9 @@ export const TextBase = styled.div<TextProps>`
     user-select: ${(props) => (props.display ? 'text' : 'none')};
     -webkit-user-select: ${(props) => (props.display ? 'text' : 'none')};
     -ms-user-select: ${(props) => (props.display ? 'text' : 'none')};
+    max-width: 500px;
+    word-wrap: break-word;
 `
-
 export const DateStyled = styled(TextBase)<TextProps>`
     color: ${(props) => (props.display ? '#ffffff' : '#121529')};
     font-size: ${(props) => props.textFontSize * 1.25}px;
@@ -106,10 +123,12 @@ export const DateStyled = styled(TextBase)<TextProps>`
 export const EventNameStyled = styled(TextBase)<TextProps>`
     color: ${(props) => (props.display ? '#4c58aa' : '#121529')};
     font-size: ${(props) => props.textFontSize * 1.5}px;
+    max-width: 500px;
+    word-wrap: break-word;
 `
 export const DescriptionStyled = styled(TextBase)<TextProps>`
     color: ${(props) => (props.display ? '#5d6074' : '#121529')};
     font-size: ${(props) => props.textFontSize}px;
     max-width: 500px;
-    word-wrap: break-word; /* Wrap long words onto the next line */
+    word-wrap: break-word;
 `

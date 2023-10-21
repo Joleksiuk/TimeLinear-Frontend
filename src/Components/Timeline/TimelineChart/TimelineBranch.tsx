@@ -1,7 +1,6 @@
 import { TimelineEvent } from '../TimelineEvent'
 import TimelineBranchCircle from './TimelineBranchCircle'
 import { BranchContainerStyled, LineStyled } from './TimelineChart.styled'
-import { useTimelineChartContext } from './TimelineChartProvider'
 import TimelineData from './TimelineData'
 
 type BranchProps = {
@@ -12,8 +11,6 @@ export default function TimelineBranch({
     direction,
     timelineEvent,
 }: BranchProps) {
-    const { parameters } = useTimelineChartContext()
-
     return (
         <BranchContainerStyled>
             <TimelineData
@@ -23,12 +20,6 @@ export default function TimelineBranch({
             <TimelineBranchCircle
                 display={direction === 'left'}
                 direction="left"
-            />
-            <LineStyled
-                width={parameters.branchWidth}
-                height={parameters.branchHeight}
-                display={true}
-                rootMargin={parameters.rootMargin}
             />
             <TimelineBranchCircle
                 display={direction === 'right'}
