@@ -5,9 +5,12 @@ import { TextField, Button, Grid } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { ContainerStyled, NameAndDateContainer } from './Timeline.styled'
 import { TimelineEvent } from './TimelineEvent'
 import TimelineChart from './TimelineChart/TimelineChart'
+import {
+    ContainerStyled,
+    NameAndDateContainer,
+} from '../TimeEvent/CreateEventForm.styled'
 
 const timelineChartParameters = {
     rootCircleRadius: 100,

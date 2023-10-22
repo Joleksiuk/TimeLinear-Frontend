@@ -5,10 +5,11 @@ function getAuthHeader() {
     const userStr = localStorage.getItem('user')
     let user = null
     if (userStr) user = JSON.parse(userStr)
+    console.log(user)
 
-    if (user && user.accessToken) {
+    if (user && user.access_token) {
         return {
-            Authorization: 'Bearer ' + user.accessToken,
+            Authorization: 'Bearer ' + user.access_token,
             'Content-Type': 'application/json',
         }
     } else {

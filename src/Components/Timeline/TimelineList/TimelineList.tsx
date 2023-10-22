@@ -11,10 +11,6 @@ export default function TimelineList() {
             <TimelineWidget />
             <TimelineWidget />
             <TimelineWidget />
-            <TimelineWidget />
-            <TimelineWidget />
-            <TimelineWidget />
-            <TimelineWidget />
         </ContainerStyled>
     )
 }
