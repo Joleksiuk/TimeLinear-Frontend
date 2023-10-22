@@ -14,9 +14,7 @@ export default function DashboardPage() {
             }}
         >
             <Toolbar />
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Outlet />
-            </Container>
+            <Outlet />
         </Box>
     )
 }
