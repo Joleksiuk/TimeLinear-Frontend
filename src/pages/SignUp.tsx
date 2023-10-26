@@ -27,7 +27,7 @@ export default function SignUp() {
             password: data.get('password'),
             role: 'USER',
         })
-        navigate('/sigin')
+        navigate('/signIn')
     }
 
     return (

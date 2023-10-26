@@ -18,6 +18,11 @@ const DefaultParameters: Parameters = {
     dataFontSize: 30,
 }
 
+type TimelineChartContextProps = {
+    parameters: Parameters
+    setParameters: (parameters: Parameters) => void
+}
+
 const DefaultTimelineChartContext: TimelineChartContextProps = {
     parameters: DefaultParameters,
     setParameters: (parameters: Parameters) => {},
@@ -26,11 +31,6 @@ const DefaultTimelineChartContext: TimelineChartContextProps = {
 const TimelineChartContext = createContext<TimelineChartContextProps>(
     DefaultTimelineChartContext
 )
-
-type TimelineChartContextProps = {
-    parameters: Parameters
-    setParameters: (parameters: Parameters) => void
-}
 
 type TimelineChartProviderProps = {
     initialParams?: Parameters

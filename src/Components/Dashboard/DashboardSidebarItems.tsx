@@ -4,7 +4,7 @@ import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import { useNavigate } from 'react-router-dom'
-import EventIcon from '@mui/icons-material/Event'
+import TimelineIcon from '@mui/icons-material/Timeline'
 import { getCurrentUser } from '@/services/AuthService'
 export default function DashboardSidebarItems() {
     const navigate = useNavigate()
@@ -22,7 +22,7 @@ export default function DashboardSidebarItems() {
                         </ListItemButton>
                         <ListItemButton onClick={() => navigate('/timeline')}>
                             <ListItemIcon>
-                                <AccessTimeIcon />
+                                <TimelineIcon />
                             </ListItemIcon>
                             <ListItemText primary="Create timeline" />
                         </ListItemButton>
@@ -30,13 +30,13 @@ export default function DashboardSidebarItems() {
                             onClick={() => navigate('/timelinesList')}
                         >
                             <ListItemIcon>
-                                <ViewListIcon />
+                                <AccessTimeIcon />
                             </ListItemIcon>
                             <ListItemText primary="My timelines" />
                         </ListItemButton>
                         <ListItemButton onClick={() => navigate('/timeEvents')}>
                             <ListItemIcon>
-                                <EventIcon />
+                                <ViewListIcon />
                             </ListItemIcon>
                             <ListItemText primary="My events" />
                         </ListItemButton>
