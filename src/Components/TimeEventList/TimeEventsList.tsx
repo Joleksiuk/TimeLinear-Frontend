@@ -11,6 +11,7 @@ import TablePaginationActions from '@mui/material/TablePagination/TablePaginatio
 import { TableCellStyled } from './TimeEventsListStyled'
 import { useTimeEventsContext } from './TimeEventsProvider'
 import CircularProgress from '@mui/material/CircularProgress'
+import TimeEventActionsDropdown from '../TimeEvent/TimeEventActions/TimeEventActionsDropdown'
 
 export default function TimeEventsList() {
     const { timeEvents, isLoadingData } = useTimeEventsContext()
@@ -51,6 +52,8 @@ export default function TimeEventsList() {
                             <TableCell component="th">Description</TableCell>
                             <TableCell component="th">Start Date</TableCell>
                             <TableCell component="th">End Date</TableCell>
+                            <TableCell component="th"></TableCell>
+
                             {(rowsPerPage > 0
                                 ? timeEvents.slice(
                                       page * rowsPerPage,
@@ -59,7 +62,7 @@ export default function TimeEventsList() {
                                 : timeEvents
                             ).map((row, index) => (
                                 <TableRow key={row.id}>
-                                    <TableCellStyled width="4%">
+                                    <TableCellStyled width="6%">
                                         {index + page * rowsPerPage}
                                     </TableCellStyled>
                                     <TableCellStyled width="25%">
@@ -68,11 +71,16 @@ export default function TimeEventsList() {
                                     <TableCellStyled width="30%">
                                         {row.description}
                                     </TableCellStyled>
-                                    <TableCellStyled width="10%">
+                                    <TableCellStyled width="15%">
                                         {row.startDate}
                                     </TableCellStyled>
-                                    <TableCellStyled width="10%">
+                                    <TableCellStyled width="15%">
                                         {row.endDate}
+                                    </TableCellStyled>
+                                    <TableCellStyled width="15%">
+                                        <TimeEventActionsDropdown
+                                            timeEvent={row}
+                                        />
                                     </TableCellStyled>
                                 </TableRow>
                             ))}

@@ -16,7 +16,7 @@ export default function DashboardPage() {
             sx={{
                 backgroundColor: Colors.pageBackground,
                 flexGrow: 1,
-                height: '100vh',
+                minHeight: '100vh',
             }}
         >
             <Toolbar />

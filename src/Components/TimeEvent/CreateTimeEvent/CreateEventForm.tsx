@@ -8,9 +8,18 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { ContainerStyled, NameAndDateContainer } from './CreateEventForm.styled'
 import { request } from '@/services/API'
 import { TIME_EVENT_URL } from '@/services/APIConstants'
-import Alert from '@mui/material/Alert'
-import { CreateEventRequest, TimeEvent } from './types'
-import { useTimeEventsContext } from '../TimeEventList/TimeEventsProvider'
+import Snackbar from '@mui/material/Snackbar'
+import CloseIcon from '@mui/icons-material/Close'
+import IconButton from '@mui/material/IconButton'
+import { CreateEventRequest, TimeEvent } from '../types'
+import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'
+import MuiAlert, { AlertProps } from '@mui/material/Alert'
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+    function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+    }
+)
 
 const MAX_NAME_LENGTH = 10
 const MAX_DESCRIPTION_LENGTH = 10
@@ -33,6 +42,7 @@ export default function CreateEventForm() {
         }
         try {
             await addNewEvent()
+            setOpenSnackbar(true)
             setEventAdded(true)
             setDescriptionError(false)
             setNameError(false)
@@ -50,7 +60,7 @@ export default function CreateEventForm() {
         const response = await request(TIME_EVENT_URL, 'POST', requestData)
         const newTimeEvent: TimeEvent = response.data
         const updatedTimeEvents = [...timeEvents]
-        timeEvents.push(newTimeEvent)
+        updatedTimeEvents.push(newTimeEvent)
         setTimeEvents(updatedTimeEvents)
         setIsLoadingData(false)
     }
@@ -68,6 +78,32 @@ export default function CreateEventForm() {
         }
         return wrongInput
     }
+
+    const [openSnackbar, setOpenSnackbar] = React.useState(false)
+
+    const handleClose = (
+        event: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === 'clickaway') {
+            return
+        }
+
+        setOpenSnackbar(false)
+    }
+
+    const action = (
+        <React.Fragment>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </React.Fragment>
+    )
 
     return (
         <form>
@@ -113,11 +149,23 @@ export default function CreateEventForm() {
                         color="primary"
                         onClick={() => handleAddEvent()}
                     >
-                        Create new Event
+                        Create Event
                     </Button>
                 </NameAndDateContainer>
                 {eventAdded && (
-                    <Alert severity="success">Event added successfully </Alert>
+                    <Snackbar
+                        open={openSnackbar}
+                        autoHideDuration={2000}
+                        onClose={handleClose}
+                    >
+                        <Alert
+                            onClose={handleClose}
+                            severity="success"
+                            sx={{ width: '100%' }}
+                        >
+                            Event created successfully!
+                        </Alert>
+                    </Snackbar>
                 )}
             </ContainerStyled>
         </form>

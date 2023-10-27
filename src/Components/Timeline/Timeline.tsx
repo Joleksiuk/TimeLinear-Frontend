@@ -10,7 +10,7 @@ import TimelineChart from './TimelineChart/TimelineChart'
 import {
     ContainerStyled,
     NameAndDateContainer,
-} from '../TimeEvent/CreateEventForm.styled'
+} from '../TimeEvent/CreateTimeEvent/CreateEventForm.styled'
 
 const timelineChartParameters = {
     rootCircleRadius: 100,

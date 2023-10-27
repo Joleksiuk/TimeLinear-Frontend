@@ -1,13 +1,22 @@
 import styled from 'styled-components'
 
+export const FlexContainer = styled.div`
+    display: flex;
+    gap: 100px;
+`
+export const ImagesFlexContainer = styled.div`
+    display: flex;
+`
+
 export const HomepageContainerStyled = styled.div`
-    display: grid;
-    grid-template-columns: 4fr 1fr;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     gap: 70px;
 `
 
 export const HomepageTextStyled = styled.div`
-    font-size: 30px;
+    font-size: 20px;
     background-color: #362d42;
     border-radius: 20px;
     padding: 20px;
@@ -28,16 +37,7 @@ export const HomepageTextContainerStyled = styled.div`
 `
 
 export const HomepageTextHeader = styled.div`
-    font-size: 50px;
-    box-shadow:
-        rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
-        rgba(233, 109, 233, 0.15) 0px -36px 30px 0px inset,
-        rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
-        rgba(0, 0, 0, 0.06) 0px 2px 1px,
-        rgba(0, 0, 0, 0.09) 0px 4px 2px,
-        rgba(0, 0, 0, 0.09) 0px 8px 4px,
-        rgba(0, 0, 0, 0.09) 0px 16px 8px,
-        rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    font-size: 25px;
 `
 
 export const HomepageDescription = styled.div``
@@ -56,6 +56,7 @@ export const HomepageImage = styled.img`
 
 export const HomepageImageMoved = styled.img`
     border-radius: 50px;
+    position: absolute;
     margin-top: -200px;
     box-shadow:
         rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
