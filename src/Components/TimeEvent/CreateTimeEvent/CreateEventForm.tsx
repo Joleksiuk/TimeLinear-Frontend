@@ -24,7 +24,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 const MAX_NAME_LENGTH = 10
 const MAX_DESCRIPTION_LENGTH = 10
 
-export default function CreateEventForm() {
+type Props = {
+    isInModal?: boolean
+}
+
+export default function CreateEventForm({ isInModal = false }: Props) {
     const { timeEvents, setTimeEvents, setIsLoadingData } =
         useTimeEventsContext()
 
@@ -92,22 +96,9 @@ export default function CreateEventForm() {
         setOpenSnackbar(false)
     }
 
-    const action = (
-        <React.Fragment>
-            <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-            >
-                <CloseIcon fontSize="small" />
-            </IconButton>
-        </React.Fragment>
-    )
-
     return (
         <form>
-            <ContainerStyled>
+            <ContainerStyled isInModal={isInModal}>
                 <NameAndDateContainer>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
@@ -152,7 +143,7 @@ export default function CreateEventForm() {
                         Create Event
                     </Button>
                 </NameAndDateContainer>
-                {eventAdded && (
+                {eventAdded && isInModal && (
                     <Snackbar
                         open={openSnackbar}
                         autoHideDuration={2000}

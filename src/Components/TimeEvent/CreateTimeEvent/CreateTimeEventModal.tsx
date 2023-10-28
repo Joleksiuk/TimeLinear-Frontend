@@ -41,7 +41,7 @@ export default function CreateTimeEventModal() {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                        <CreateEventForm />
+                        <CreateEventForm isInModal={true} />
                     </Box>
                 </Fade>
             </Modal>

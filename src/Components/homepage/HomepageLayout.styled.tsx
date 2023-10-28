@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const FlexContainer = styled.div`
     display: flex;
-    gap: 100px;
+    align-items: center;
+    gap: 50px;
 `
 export const ImagesFlexContainer = styled.div`
     display: flex;
@@ -12,7 +13,7 @@ export const HomepageContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 70px;
+    gap: 50px;
 `
 
 export const HomepageTextStyled = styled.div`

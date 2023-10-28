@@ -1,29 +1,22 @@
-import {
-    createContext,
-    useContext,
-    useState,
-    ReactNode,
-    useEffect,
-} from 'react'
-import { TimeEvent } from '../TimeEvent/types'
-import TimeEventListService from './TimeEventListService'
+import { ReactNode, createContext, useEffect, useState } from 'react'
+import { TimelineModel } from './types'
 import { getCurrentUser } from '@/services/AuthService'
 
-type TimeEventsContextProps = {
+type TimelinesContextProps = {
     isLoadingData: boolean
-    timeEvents: Array<TimeEvent>
-    setTimeEvents: (events: Array<TimeEvent>) => void
+    timelines: Array<TimelineModel>
+    setTimelines: (events: Array<TimelineModel>) => void
     setIsLoadingData: (value: boolean) => void
 }
 
-const DefaultTimeEventsContext: TimeEventsContextProps = {
+const DefaultTimeEventsContext: TimelinesContextProps = {
     isLoadingData: false,
-    timeEvents: [],
-    setTimeEvents: (events: Array<TimeEvent>) => {},
+    timelines: [],
+    setTimelines: (events: Array<TimelineModel>) => {},
     setIsLoadingData: (value: boolean) => {},
 }
 
-const TimeEventsContext = createContext<TimeEventsContextProps>(
+const TimelinesContext = createContext<TimelinesContextProps>(
     DefaultTimeEventsContext
 )
 
@@ -33,13 +26,10 @@ type Props = {
 
 const TimeEventsProvider = ({ children }: Props) => {
     const [isLoadingData, setIsLoadingData] = useState<boolean>(false)
-    const [timeEvents, setTimeEvents] = useState<Array<TimeEvent>>([])
+    const [timelines, setTimelines] = useState<Array<TimelineModel>>([])
 
     const initData = async () => {
-        setIsLoadingData(true)
-        const response = await TimeEventListService.getOwnedTimeEvents()
-        setTimeEvents(response.timeEvents)
-        setIsLoadingData(false)
+        //TODO init timelines here
     }
 
     useEffect(() => {
@@ -52,7 +42,7 @@ const TimeEventsProvider = ({ children }: Props) => {
         <TimeEventsContext.Provider
             value={{
                 isLoadingData: isLoadingData,
-                timeEvents: timeEvents,
+                timelines: timelines,
                 setTimeEvents: (newTimeEvents: Array<TimeEvent>) => {
                     setTimeEvents(newTimeEvents)
                 },

@@ -5,9 +5,12 @@ export const EventFormContainerStyled = styled.div`
     flex-direction: column;
     gap: 40px;
 `
-
-export const ContainerStyled = styled.div`
+type Props = {
+    isInModal: boolean
+}
+export const ContainerStyled = styled.div<Props>`
     display: flex;
+    flex-direction: ${(props) => (props.isInModal ? 'column' : 'row')};
     gap: 20px;
 `
 

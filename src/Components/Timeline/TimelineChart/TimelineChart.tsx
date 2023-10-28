@@ -21,16 +21,18 @@ export default function TimelineChart({ events, parameters }: Props) {
     return (
         <TimelineChartProvider initialParams={parameters}>
             <ElementsStyled>
-                <CircleRootStyled
-                    width={parameters.rootCircleRadius}
-                    height={parameters.rootCircleRadius}
-                    display={true}
-                >
-                    <InnerCircleRootStyled
-                        width={parameters.rootCircleRadius * 0.32}
-                        height={parameters.rootCircleRadius * 0.32}
-                    />
-                </CircleRootStyled>
+                {events.length > 0 && (
+                    <CircleRootStyled
+                        width={parameters.rootCircleRadius}
+                        height={parameters.rootCircleRadius}
+                        display={true}
+                    >
+                        <InnerCircleRootStyled
+                            width={parameters.rootCircleRadius * 0.32}
+                            height={parameters.rootCircleRadius * 0.32}
+                        />
+                    </CircleRootStyled>
+                )}
                 <LineStyled
                     height={parameters.branchHeight}
                     rootMargin={parameters.rootCircleRadius}

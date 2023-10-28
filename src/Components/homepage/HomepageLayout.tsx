@@ -9,47 +9,41 @@ import {
     ImagesFlexContainer,
 } from './HomepageLayout.styled'
 
+import { Typography } from '@mui/material'
+
 export default function HomepageLayout() {
     return (
         <HomepageContainerStyled>
+            <Typography sx={{ fontSize: '30px' }}>
+                Introducing Timelinear!
+            </Typography>
             <FlexContainer>
                 <HomepageImage
-                    height={'40%'}
-                    width={'40%'}
+                    height={'55%'}
+                    width={'55%'}
                     src="https://zapodaj.net/images/5a11a03b8236f.png"
                     alt=""
                 />
                 <HomepageTextContainerStyled>
-                    <HomepageTextHeader>
-                        Introducing Timelinear!
-                    </HomepageTextHeader>
                     <HomepageTextStyled>
                         Your Ultimate Event Planning Companion! Plan, Visualize,
                         and Share Your Events Like Never Before Are you tired of
                         juggling multiple apps to manage your events? Say
                         goodbye to the chaos and welcome the all-in-one solution
-                        that simplifies event planning, Timeline Charts, and
-                        Calendar Management
+                        that simplifies event planning
                     </HomepageTextStyled>
                 </HomepageTextContainerStyled>
             </FlexContainer>
             <FlexContainer>
                 <HomepageTextContainerStyled>
-                    <HomepageTextHeader>
-                        Introducing Timelinear!
-                    </HomepageTextHeader>
                     <HomepageTextStyled>
-                        Your Ultimate Event Planning Companion! Plan, Visualize,
-                        and Share Your Events Like Never Before Are you tired of
-                        juggling multiple apps to manage your events? Say
-                        goodbye to the chaos and welcome the all-in-one solution
-                        that simplifies event planning, Timeline Charts, and
-                        Calendar Management
+                        You can add events to timeline to visually present your
+                        plans!
                     </HomepageTextStyled>
                 </HomepageTextContainerStyled>
                 <HomepageImage
-                    height={'50%'}
-                    width={'50%'}
+                    height={'60%'}
+                    width={'60%'}
                     src="https://zapodaj.net/images/5b98740da19bf.png"
                     alt=""
                 />
