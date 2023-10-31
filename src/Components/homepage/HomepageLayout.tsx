@@ -19,8 +19,8 @@ export default function HomepageLayout() {
             </Typography>
             <FlexContainer>
                 <HomepageImage
-                    height={'55%'}
-                    width={'55%'}
+                    height={'30%'}
+                    width={'30%'}
                     src="https://zapodaj.net/images/5a11a03b8236f.png"
                     alt=""
                 />
@@ -42,8 +42,8 @@ export default function HomepageLayout() {
                     </HomepageTextStyled>
                 </HomepageTextContainerStyled>
                 <HomepageImage
-                    height={'60%'}
-                    width={'60%'}
+                    height={'40%'}
+                    width={'40%'}
                     src="https://zapodaj.net/images/5b98740da19bf.png"
                     alt=""
                 />

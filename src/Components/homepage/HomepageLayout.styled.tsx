@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const FlexContainer = styled.div`
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 50px;
 `
 export const ImagesFlexContainer = styled.div`

@@ -11,16 +11,22 @@ import {
 import { useState } from 'react'
 
 type Props = {
-    type: 'password' | 'repeat-password'
+    type: 'current-password' | 'new-password' | 'password' | 'repeat-password'
     label: string
+    onChangeValue?: (value: string) => void
 }
-export default function PasswordField({ type, label }: Props): JSX.Element {
+export default function PasswordField({
+    type,
+    label,
+    onChangeValue,
+}: Props): JSX.Element {
     const [isValidPassword, setIsValidPassword] = useState<boolean>(true)
     const [showPassword, setShowPassword] = useState(false)
 
     const handlePasswordChange = (event: any): void => {
         const isPasswordValid = Validation.isValidPassword(event.target.value)
         setIsValidPassword(isPasswordValid)
+        onChangeValue?.(event.target.value)
     }
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)

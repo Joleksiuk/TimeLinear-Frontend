@@ -20,12 +20,6 @@ export default function DashboardSidebarItems() {
                             </ListItemIcon>
                             <ListItemText primary="Calendar" />
                         </ListItemButton>
-                        <ListItemButton onClick={() => navigate('/timeline')}>
-                            <ListItemIcon>
-                                <TimelineIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Create timeline" />
-                        </ListItemButton>
                         <ListItemButton
                             onClick={() => navigate('/timelinesList')}
                         >

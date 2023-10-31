@@ -7,7 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
-import Settings from '@mui/icons-material/Settings'
+import PasswordIcon from '@mui/icons-material/Password'
 import Logout from '@mui/icons-material/Logout'
 import { getCurrentUser, logout } from '@/services/AuthService'
 import { Typography } from '@mui/material'
@@ -26,6 +26,10 @@ export default function LoggedAccountDropdown() {
     const handleLogout = () => {
         logout()
         window.location.href = homepageURL + '/signIn'
+    }
+
+    const handleChangePassword = () => {
+        window.location.href = homepageURL + '/changePassword'
     }
 
     return (
@@ -94,6 +98,12 @@ export default function LoggedAccountDropdown() {
                     <Avatar /> Profile
                 </MenuItem>
                 <Divider />
+                <MenuItem onClick={handleChangePassword}>
+                    <ListItemIcon>
+                        <PasswordIcon fontSize="small" />
+                    </ListItemIcon>
+                    Change password
+                </MenuItem>
                 <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />

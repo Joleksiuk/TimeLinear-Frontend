@@ -1,19 +1,12 @@
 import React, { useState } from 'react'
-import dayjs, { Dayjs } from 'dayjs'
 
 import { TextField, Button, Grid } from '@mui/material'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { ContainerStyled, NameAndDateContainer } from './CreateEventForm.styled'
-import { request } from '@/services/API'
-import { TIME_EVENT_URL } from '@/services/APIConstants'
 import Snackbar from '@mui/material/Snackbar'
-import { CreateEventRequest, TimeEvent } from '../types'
-import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
-import { useSingleTimelineContext } from '@/Components/Timeline/TimelineProvider/SingleTimelineProvider'
-import DateUtils from '@/utils/user/DateUtils'
+import { TimelineModel, TimelinePostRequest } from '../TimelineProvider/types'
+import { TimelineFormContainerStyled } from './CreateTimeline.styled'
+import { useTimelineContext } from '../TimelineProvider/TimelinesProvider'
+import TimelineService from '../TimelineProvider/TimelineService'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     function Alert(props, ref) {
@@ -21,33 +14,24 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     }
 )
 
-const MAX_NAME_LENGTH = 50
-const MAX_DESCRIPTION_LENGTH = 255
+const MAX_NAME_LENGTH = 10
+const MAX_DESCRIPTION_LENGTH = 10
 
-type Props = {
-    isInModal?: boolean
-    isOnTimelinePage?: boolean
-}
-
-export default function CreateEventForm({ isInModal = false }: Props) {
-    const { timeEvents, setTimeEvents, setIsLoadingData } =
-        useTimeEventsContext()
-    const { addEventToTimeline } = useSingleTimelineContext()
-    const [date, setDate] = React.useState<Dayjs | null>(dayjs(Date.now()))
-    const [eventName, setEventName] = useState('')
+export default function CreateTimelineForm() {
+    const { timelines, setTimelines, setIsLoadingData } = useTimelineContext()
+    const [timelineName, setTimelineName] = useState('')
     const [description, setDescription] = useState('')
     const [eventAdded, setEventAdded] = useState(false)
 
     const [descriptionError, setDescriptionError] = useState(false)
     const [nameError, setNameError] = useState(false)
 
-    const handleAddEvent = async () => {
+    const handleAddTimeline = async () => {
         if (isDataInvalid()) {
             return
         }
         try {
-            const newTimeEvent = await addNewEvent()
-            addEventToTimeline(newTimeEvent)
+            await addNewEvent()
             setOpenSnackbar(true)
             setEventAdded(true)
             setDescriptionError(false)
@@ -55,31 +39,23 @@ export default function CreateEventForm({ isInModal = false }: Props) {
         } catch (error) {}
     }
 
-    const addNewEvent = async (): Promise<TimeEvent> => {
-        const requestData: CreateEventRequest = {
-            startDate: DateUtils.dayjsDateToString(date),
-            endDate: DateUtils.dayjsDateToString(date),
-            name: eventName,
+    const addNewEvent = async () => {
+        const requestData: TimelinePostRequest = {
+            name: timelineName,
             description: description,
         }
-        console.log(requestData)
         setIsLoadingData(true)
-        const response = await request(TIME_EVENT_URL, 'POST', requestData)
-        console.log(response.data)
-
-        const newTimeEvent: TimeEvent = response.data
-        const updatedTimeEvents = [...timeEvents]
-        updatedTimeEvents.push(newTimeEvent)
-        setTimeEvents(updatedTimeEvents)
+        const newTimeline: TimelineModel =
+            await TimelineService.createTimeline(requestData)
+        const updatedTimeEvents = [...timelines]
+        updatedTimeEvents.push(newTimeline)
+        setTimelines(updatedTimeEvents)
         setIsLoadingData(false)
-        console.log(updatedTimeEvents)
-
-        return newTimeEvent
     }
 
     const isDataInvalid = (): boolean => {
         let wrongInput = false
-        if (eventName.length === 0) {
+        if (timelineName.length === 0) {
             setNameError(true)
             wrongInput = true
         }
@@ -106,20 +82,13 @@ export default function CreateEventForm({ isInModal = false }: Props) {
 
     return (
         <form>
-            <ContainerStyled>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        label="Controlled picker"
-                        value={date}
-                        onChange={(date) => setDate(date)}
-                    />
-                </LocalizationProvider>
+            <TimelineFormContainerStyled>
                 <TextField
                     label="Event Name"
-                    value={eventName}
+                    value={timelineName}
                     onChange={(e) => {
                         if (e.target.value.length <= MAX_NAME_LENGTH) {
-                            setEventName(e.target.value)
+                            setTimelineName(e.target.value)
                             setNameError(false)
                         } else {
                             setNameError(true)
@@ -143,11 +112,11 @@ export default function CreateEventForm({ isInModal = false }: Props) {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => handleAddEvent()}
+                    onClick={() => handleAddTimeline()}
                 >
-                    Create Event
+                    Create Timeline
                 </Button>
-                {eventAdded && isInModal && (
+                {eventAdded && (
                     <Snackbar
                         open={openSnackbar}
                         autoHideDuration={2000}
@@ -162,7 +131,7 @@ export default function CreateEventForm({ isInModal = false }: Props) {
                         </Alert>
                     </Snackbar>
                 )}
-            </ContainerStyled>
+            </TimelineFormContainerStyled>
         </form>
     )
 }

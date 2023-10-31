@@ -1,45 +1,8 @@
 import TimelineChart from '../TimelineChart/TimelineChart'
-import { TimelineEvent } from '../TimelineEvent'
-import dayjs from 'dayjs'
 import { ItemStyled } from './TimelineList.styled'
-
-const timelineItems: TimelineEvent[] = [
-    {
-        date: dayjs('2023-10-14T15:30:00'),
-        eventName: 'some event',
-        description: 'description',
-    },
-    {
-        date: dayjs('2023-10-14T15:30:00'),
-        eventName: 'some event',
-        description: 'description',
-    },
-    {
-        date: dayjs('2023-10-14T15:30:00'),
-        eventName: 'some event',
-        description: 'description',
-    },
-    {
-        date: dayjs('2023-10-14T15:30:00'),
-        eventName: 'some event',
-        description: 'description',
-    },
-    {
-        date: dayjs('2023-10-14T15:30:00'),
-        eventName: 'some event',
-        description: 'description',
-    },
-    {
-        date: dayjs('2023-10-14T15:30:00'),
-        eventName: 'some event',
-        description: 'description',
-    },
-    {
-        date: dayjs('2023-10-14T15:30:00'),
-        eventName: 'some event',
-        description: 'description',
-    },
-]
+import { TimelineModel } from '../TimelineProvider/types'
+import { useNavigate } from 'react-router-dom'
+import TimelineUtils from '../TimelineUtils'
 
 const timelineChartParameters = {
     rootCircleRadius: 50,
@@ -49,13 +12,23 @@ const timelineChartParameters = {
     branchHeight: 70,
     dataFontSize: 10,
 }
+type Props = {
+    timeline: TimelineModel
+}
 
-export default function TimelineWidget() {
+export default function TimelineWidget({ timeline }: Props) {
+    const navigate = useNavigate()
+    const handleOnClick = () => {
+        navigate(`/timeline/${timeline.id}`)
+    }
+
     return (
-        <ItemStyled>
+        <ItemStyled onClick={handleOnClick}>
             <TimelineChart
                 parameters={timelineChartParameters}
-                events={timelineItems}
+                events={TimelineUtils.mapTimeEventsToTimelineEvents(
+                    timeline.timeEvents
+                )}
             />
         </ItemStyled>
     )

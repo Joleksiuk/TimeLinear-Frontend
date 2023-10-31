@@ -4,8 +4,7 @@ import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import Fade from '@mui/material/Fade'
 import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import CreateEventForm from './CreateEventForm'
+import CreateTimelineForm from './CreateTimelineForm'
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -18,7 +17,7 @@ const style = {
     p: 4,
 }
 
-export default function CreateTimeEventModal() {
+export default function CreateTimelineModal() {
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
@@ -26,7 +25,7 @@ export default function CreateTimeEventModal() {
     return (
         <div>
             <Button variant="contained" onClick={handleOpen}>
-                Create Timeline
+                Create timeline
             </Button>
             <Modal
                 aria-labelledby="transition-modal-title"
@@ -43,7 +42,7 @@ export default function CreateTimeEventModal() {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                        <CreateEventForm isInModal={true} />
+                        <CreateTimelineForm />
                     </Box>
                 </Fade>
             </Modal>

@@ -1,34 +1,36 @@
 import * as React from 'react'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import Link from '@mui/material/Link'
 import PasswordField from '@/Components/formFields/PasswordField'
-import EmailField from '@/Components/formFields/EmailField'
-import { login } from '@/services/AuthService'
 import { useState } from 'react'
 import { Alert, AlertTitle } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-import { homepageURL } from '@/constants/Variables'
+import { changePassword } from '@/services/AuthService'
 
-export default function SignIn() {
-    const [showLoginError, setShowLoginError] = useState(false)
+export default function ChangePasswordForm() {
+    const [error, setError] = useState<string>('')
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         event.preventDefault()
         const data = new FormData(event.currentTarget)
+        if (data.get('new-password') !== data.get('repeat-password')) {
+            setError('Passwords does not match')
+            return
+        }
+
         try {
-            await login({
-                email: data.get('email'),
-                password: data.get('password'),
-            })
-            window.location.href = homepageURL
+            await changePassword(
+                data.get('current-password')?.toString() || '',
+                data.get('new-password')?.toString() || '',
+                data.get('repeat-password')?.toString() || ''
+            )
         } catch (error) {
-            setShowLoginError(true)
+            setError('Invalid password')
         }
     }
 
@@ -46,12 +48,12 @@ export default function SignIn() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Change password
                 </Typography>
-                {showLoginError && (
+                {error !== '' && (
                     <Alert severity="error">
                         <AlertTitle>Error</AlertTitle>
-                        Could not log in - Email does not match the password
+                        {error}
                     </Alert>
                 )}
                 <Box
@@ -60,26 +62,23 @@ export default function SignIn() {
                     noValidate
                     sx={{ mt: 1 }}
                 >
-                    <EmailField />
-                    <PasswordField type="password" label="Password" />
+                    <PasswordField
+                        type="current-password"
+                        label="Current password"
+                    />
+                    <PasswordField type="new-password" label="New Password" />
+                    <PasswordField
+                        type="repeat-password"
+                        label="Repeat new Password"
+                    />
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign In
+                        Change password
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#">Forgot password?</Link>
-                        </Grid>
-                        <Grid item>
-                            <Link href="signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
                 </Box>
             </Box>
         </Container>

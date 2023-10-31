@@ -19,7 +19,7 @@ function getAuthHeader() {
 
 export async function request(
     endpoint: string,
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     data?: any
 ): Promise<AxiosResponse> {
     const userStr = localStorage.getItem('user')
@@ -35,7 +35,6 @@ export async function request(
 
     try {
         const response = await axios(config)
-        console.log(response)
         return response
     } catch (error) {
         console.error('An error occurred:', error)

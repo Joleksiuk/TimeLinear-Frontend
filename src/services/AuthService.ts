@@ -1,7 +1,8 @@
-import { SIGN_IN_URL, SIGN_UP_URL } from './APIConstants'
+import { CHANGE_PASSWORD_URL, SIGN_IN_URL, SIGN_UP_URL } from './APIConstants'
 import { request } from './API'
 import { SignUpRequest } from '@/models/SignUp'
 import { SignInRequest, SignInResponse } from '@/models/SignIn'
+import { ChangePasswordRequest } from '@/Components/Forms/types'
 
 export const register = (username: string, email: string, password: string) => {
     const data: SignUpRequest = {
@@ -11,6 +12,19 @@ export const register = (username: string, email: string, password: string) => {
         role: 'USER',
     }
     return request(SIGN_UP_URL, 'POST', data)
+}
+
+export const changePassword = (
+    currentPassword: string,
+    newPassword: string,
+    confirmationPassword: string
+) => {
+    const data: ChangePasswordRequest = {
+        currentPassword,
+        newPassword,
+        confirmationPassword,
+    }
+    return request(CHANGE_PASSWORD_URL, 'POST', data)
 }
 
 export const login = async (data: SignInRequest): Promise<SignInResponse> => {

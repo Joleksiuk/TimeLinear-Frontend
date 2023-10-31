@@ -1,6 +1,13 @@
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import {
+    ReactNode,
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+} from 'react'
 import { TimelineModel } from './types'
 import { getCurrentUser } from '@/services/AuthService'
+import TimelineService from './TimelineService'
 
 type TimelinesContextProps = {
     isLoadingData: boolean
@@ -24,12 +31,15 @@ type Props = {
     children: ReactNode
 }
 
-const TimeEventsProvider = ({ children }: Props) => {
+const TimelinesProvider = ({ children }: Props) => {
     const [isLoadingData, setIsLoadingData] = useState<boolean>(false)
     const [timelines, setTimelines] = useState<Array<TimelineModel>>([])
 
     const initData = async () => {
-        //TODO init timelines here
+        setIsLoadingData(true)
+        const response = await TimelineService.getOwnedTimelines()
+        setTimelines(response.timelines)
+        setIsLoadingData(false)
     }
 
     useEffect(() => {
@@ -39,12 +49,12 @@ const TimeEventsProvider = ({ children }: Props) => {
     }, [])
 
     return (
-        <TimeEventsContext.Provider
+        <TimelinesContext.Provider
             value={{
                 isLoadingData: isLoadingData,
                 timelines: timelines,
-                setTimeEvents: (newTimeEvents: Array<TimeEvent>) => {
-                    setTimeEvents(newTimeEvents)
+                setTimelines: (newTimeEvents: Array<TimelineModel>) => {
+                    setTimelines(newTimeEvents)
                 },
                 setIsLoadingData: (value: boolean) => {
                     setIsLoadingData(value)
@@ -52,18 +62,18 @@ const TimeEventsProvider = ({ children }: Props) => {
             }}
         >
             {children}
-        </TimeEventsContext.Provider>
+        </TimelinesContext.Provider>
     )
 }
 
-const useTimeEventsContext = () => {
-    const context = useContext<TimeEventsContextProps>(TimeEventsContext)
+const useTimelineContext = () => {
+    const context = useContext<TimelinesContextProps>(TimelinesContext)
     if (!context) {
         throw new Error(
-            'useTimeEventsContext must be used within a TimeEventsProvider'
+            'useTimelineContext must be used within a TimelineProvider'
         )
     }
     return context
 }
 
-export { TimeEventsProvider, useTimeEventsContext }
+export { TimelinesProvider, useTimelineContext }

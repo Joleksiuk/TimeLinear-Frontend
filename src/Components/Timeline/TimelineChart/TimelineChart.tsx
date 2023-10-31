@@ -6,10 +6,7 @@ import {
     InnerCircleRootStyled,
     LineStyled,
 } from './TimelineChart.styled'
-import {
-    TimelineChartProvider,
-    useTimelineChartContext,
-} from './TimelineChartProvider'
+import { TimelineChartProvider } from './TimelineChartProvider'
 import { Parameters } from './TimelineChartProvider'
 
 type Props = {
@@ -21,18 +18,16 @@ export default function TimelineChart({ events, parameters }: Props) {
     return (
         <TimelineChartProvider initialParams={parameters}>
             <ElementsStyled>
-                {events.length > 0 && (
-                    <CircleRootStyled
-                        width={parameters.rootCircleRadius}
-                        height={parameters.rootCircleRadius}
-                        display={true}
-                    >
-                        <InnerCircleRootStyled
-                            width={parameters.rootCircleRadius * 0.32}
-                            height={parameters.rootCircleRadius * 0.32}
-                        />
-                    </CircleRootStyled>
-                )}
+                <CircleRootStyled
+                    width={parameters.rootCircleRadius}
+                    height={parameters.rootCircleRadius}
+                    display={true}
+                >
+                    <InnerCircleRootStyled
+                        width={parameters.rootCircleRadius * 0.32}
+                        height={parameters.rootCircleRadius * 0.32}
+                    />
+                </CircleRootStyled>
                 <LineStyled
                     height={parameters.branchHeight}
                     rootMargin={parameters.rootCircleRadius}
