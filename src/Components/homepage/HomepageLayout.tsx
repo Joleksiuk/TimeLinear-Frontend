@@ -1,10 +1,10 @@
+import IconSearch from '../IconSearch/IconSearch'
 import {
     HomepageContainerStyled,
     HomepageTextStyled,
     HomepageTextContainerStyled,
     HomepageTextHeader,
     HomepageImage,
-    HomepageImageMoved,
     FlexContainer,
     ImagesFlexContainer,
 } from './HomepageLayout.styled'
@@ -14,6 +14,7 @@ import { Typography } from '@mui/material'
 export default function HomepageLayout() {
     return (
         <HomepageContainerStyled>
+            <IconSearch />
             <Typography sx={{ fontSize: '30px' }}>
                 Introducing Timelinear!
             </Typography>
