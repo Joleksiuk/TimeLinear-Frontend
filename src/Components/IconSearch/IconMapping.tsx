@@ -1,6 +1,10 @@
 import * as icons from '@mui/icons-material'
 
-export const iconMapping = {
+interface IconsMapped {
+    [key: string]: JSX.Element
+}
+
+export const iconMapping: IconsMapped = {
     Abc: <icons.Abc />,
     AbcOutlined: <icons.AbcOutlined />,
     AbcRounded: <icons.AbcRounded />,

@@ -1,4 +1,3 @@
-import IconSearch from '../IconSearch/IconSearch'
 import {
     HomepageContainerStyled,
     HomepageTextStyled,
@@ -14,7 +13,6 @@ import { Typography } from '@mui/material'
 export default function HomepageLayout() {
     return (
         <HomepageContainerStyled>
-            <IconSearch />
             <Typography sx={{ fontSize: '30px' }}>
                 Introducing Timelinear!
             </Typography>

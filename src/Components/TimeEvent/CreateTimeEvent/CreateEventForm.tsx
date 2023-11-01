@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 
-import { TextField, Button, Grid } from '@mui/material'
+import { TextField, Button, Typography } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { ContainerStyled, NameAndDateContainer } from './CreateEventForm.styled'
+import {
+    ContainerStyled,
+    IconFormContainerStyled,
+} from './CreateEventForm.styled'
 import { request } from '@/services/API'
 import { TIME_EVENT_URL } from '@/services/APIConstants'
 import Snackbar from '@mui/material/Snackbar'
@@ -14,6 +17,10 @@ import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
 import { useSingleTimelineContext } from '@/Components/Timeline/TimelineProvider/SingleTimelineProvider'
 import DateUtils from '@/utils/user/DateUtils'
+import EmojiPickerComponent from '@/Components/IconSearch/EmojiPickerComponent'
+import IconSearch from '@/Components/IconSearch/IconSearch'
+import { EventIcon } from '@/Components/IconSearch/types'
+import EventIconComponent from '@/Components/IconSearch/EventIconComponent'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     function Alert(props, ref) {
@@ -37,9 +44,10 @@ export default function CreateEventForm({ isInModal = false }: Props) {
     const [eventName, setEventName] = useState('')
     const [description, setDescription] = useState('')
     const [eventAdded, setEventAdded] = useState(false)
-
+    const [eventIcon, setEventIcon] = useState<EventIcon>()
     const [descriptionError, setDescriptionError] = useState(false)
     const [nameError, setNameError] = useState(false)
+    const [openSnackbar, setOpenSnackbar] = React.useState(false)
 
     const handleAddEvent = async () => {
         if (isDataInvalid()) {
@@ -61,18 +69,17 @@ export default function CreateEventForm({ isInModal = false }: Props) {
             endDate: DateUtils.dayjsDateToString(date),
             name: eventName,
             description: description,
+            iconType: eventIcon?.type,
+            iconSource: eventIcon?.source,
         }
-        console.log(requestData)
         setIsLoadingData(true)
         const response = await request(TIME_EVENT_URL, 'POST', requestData)
-        console.log(response.data)
-
         const newTimeEvent: TimeEvent = response.data
         const updatedTimeEvents = [...timeEvents]
         updatedTimeEvents.push(newTimeEvent)
         setTimeEvents(updatedTimeEvents)
         setIsLoadingData(false)
-        console.log(updatedTimeEvents)
+        console.log(newTimeEvent)
 
         return newTimeEvent
     }
@@ -91,8 +98,6 @@ export default function CreateEventForm({ isInModal = false }: Props) {
         return wrongInput
     }
 
-    const [openSnackbar, setOpenSnackbar] = React.useState(false)
-
     const handleClose = (
         event: React.SyntheticEvent | Event,
         reason?: string
@@ -100,7 +105,6 @@ export default function CreateEventForm({ isInModal = false }: Props) {
         if (reason === 'clickaway') {
             return
         }
-
         setOpenSnackbar(false)
     }
 
@@ -140,6 +144,15 @@ export default function CreateEventForm({ isInModal = false }: Props) {
                     }}
                     error={descriptionError}
                 />
+                <div>
+                    <Typography>Chosen icon:</Typography>
+                    {<EventIconComponent eventIcon={eventIcon} />}
+                </div>
+                <IconFormContainerStyled>
+                    <EmojiPickerComponent setEventIcon={setEventIcon} />
+                    <div>OR</div>
+                    <IconSearch setEventIcon={setEventIcon} />
+                </IconFormContainerStyled>
                 <Button
                     variant="contained"
                     color="primary"

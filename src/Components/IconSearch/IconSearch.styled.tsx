@@ -9,4 +9,12 @@ export const IconsContainer = styled.div`
 `
 export const IconContainerStyled = styled.div`
     padding: 15px;
+    &:hover {
+        cursor: pointer;
+        background-color: darkgray;
+    }
+
+    &:active {
+        background-color: lightblue;
+    }
 `

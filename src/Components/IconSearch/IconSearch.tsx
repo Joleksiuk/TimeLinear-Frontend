@@ -9,14 +9,37 @@ import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup'
 import { PopupBody } from './IconSearch.styledmui'
 import { IconContainerStyled, IconsContainer } from './IconSearch.styled'
 import { iconMapping } from './IconMapping'
+import { useState } from 'react'
+import { EventIcon } from './types'
 
-export default function IconSearch() {
-    const [anchor, setAnchor] = React.useState<null | HTMLElement>(null)
+const iconNames = Object.keys(icons)
+type Props = {
+    setEventIcon: (value: EventIcon) => void
+}
+export default function IconSearch({ setEventIcon }: Props) {
+    const [anchor, setAnchor] = useState<null | HTMLElement>(null)
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchor(anchor ? null : event.currentTarget)
     }
+    const [textFiler, setTextFilter] = useState<string>('')
     const open = Boolean(anchor)
     const id = open ? 'simple-popup' : undefined
+
+    const handleChooseIcon = (iconName: string) => {
+        const timeEventIcon: EventIcon = {
+            type: 'icon',
+            source: iconName,
+        }
+        setEventIcon(timeEventIcon)
+    }
+
+    const handleTextSearch = (event: any) => {
+        setTextFilter(event.target.value)
+    }
+
+    const filterNames = (iconName: string): boolean => {
+        return iconName.toLowerCase().includes(textFiler.toLowerCase())
+    }
 
     return (
         <div>
@@ -32,8 +55,9 @@ export default function IconSearch() {
             >
                 <InputBase
                     sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search Google Maps"
-                    inputProps={{ 'aria-label': 'Search for icon' }}
+                    placeholder="Search for icons"
+                    inputProps={{ 'aria-label': 'Search for icons' }}
+                    onChange={handleTextSearch}
                 />
                 <IconButton
                     type="button"
@@ -46,10 +70,14 @@ export default function IconSearch() {
             <BasePopup id={id} open={open} anchor={anchor}>
                 <PopupBody>
                     <IconsContainer>
-                        {Object.keys(icons)
-                            .slice(0, 1000)
+                        {iconNames
+                            .filter(filterNames)
+                            .slice(0, 100)
                             .map((iconName) => (
-                                <IconContainerStyled key={iconName}>
+                                <IconContainerStyled
+                                    onClick={() => handleChooseIcon(iconName)}
+                                    key={iconName}
+                                >
                                     {iconMapping[iconName]}
                                 </IconContainerStyled>
                             ))}

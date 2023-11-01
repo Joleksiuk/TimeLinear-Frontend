@@ -9,6 +9,7 @@ import CalendarPage from './pages/CalendarPage'
 import TimelinesListPage from './pages/TimelinesListPage'
 import EventsListPage from './pages/TimeEventsListPage'
 import ChangePasswordPage from './pages/ChangePasswordPage'
+import GroupsPage from './pages/GroupsPage'
 
 export default function App() {
     return (
@@ -29,6 +30,7 @@ export default function App() {
                         element={<TimelinesListPage />}
                     />
                     <Route path="timeEvents" element={<EventsListPage />} />
+                    <Route path="groups" element={<GroupsPage />} />
                     <Route
                         path="changePassword"
                         element={<ChangePasswordPage />}

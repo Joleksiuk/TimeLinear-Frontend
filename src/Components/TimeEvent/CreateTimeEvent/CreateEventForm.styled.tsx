@@ -16,3 +16,8 @@ export const NameAndDateContainer = styled.div`
     display: flex;
     gap: 20px;
 `
+
+export const IconFormContainerStyled = styled.div`
+    display: flex;
+    gap: 20px;
+`

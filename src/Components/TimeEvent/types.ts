@@ -3,6 +3,8 @@ export type CreateEventRequest = {
     description: string
     startDate: string | undefined
     endDate: string | undefined
+    iconType?: 'emoji' | 'icon'
+    iconSource?: string
 }
 
 export type CreateEventResponse = {}
@@ -13,6 +15,8 @@ export type TimeEvent = {
     description: string
     startDate: string
     endDate: string
+    iconType?: 'emoji' | 'icon'
+    iconSource?: string
 }
 
 export type TimeEventsBulkResponse = {

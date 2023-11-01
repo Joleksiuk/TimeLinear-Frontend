@@ -1,27 +1,29 @@
-import * as React from 'react'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableFooter from '@mui/material/TableFooter'
-import TablePagination from '@mui/material/TablePagination'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+import { useState } from 'react'
+import { useGroupsContext } from '../GroupsProvider'
+import {
+    CircularProgress,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableFooter,
+    TablePagination,
+    TableRow,
+} from '@mui/material'
+import { TableCellStyled, UsersContainerStyled } from './GroupList.styled'
+import GroupActionsDropdown from './GroupActionDropdown'
 import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions'
-import { TableCellStyled } from './TimeEventsListStyled'
-import { useTimeEventsContext } from './TimeEventsProvider'
-import CircularProgress from '@mui/material/CircularProgress'
-import TimeEventActionsDropdown from '../TimeEvent/TimeEventActions/TimeEventActionsDropdown'
-import EventIconComponent from '../IconSearch/EventIconComponent'
+import GroupUserComponent from './GroupUserComponent'
 
-export default function TimeEventsList() {
-    const { timeEvents, isLoadingData } = useTimeEventsContext()
+export default function GroupsList() {
+    const { groups, isLoadingData } = useGroupsContext()
 
-    const [page, setPage] = React.useState(0)
-    const [rowsPerPage, setRowsPerPage] = React.useState(10)
+    const [page, setPage] = useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(10)
 
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - timeEvents.length) : 0
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - groups.length) : 0
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -51,17 +53,16 @@ export default function TimeEventsList() {
                             <TableCell component="th"></TableCell>
                             <TableCell component="th">Name</TableCell>
                             <TableCell component="th">Description</TableCell>
-                            <TableCell component="th">Start Date</TableCell>
-                            <TableCell component="th">End Date</TableCell>
+                            <TableCell component="th">Users</TableCell>
                             <TableCell component="th"></TableCell>
 
                             {(rowsPerPage > 0
-                                ? timeEvents.slice(
+                                ? groups?.slice(
                                       page * rowsPerPage,
                                       page * rowsPerPage + rowsPerPage
                                   )
-                                : timeEvents
-                            ).map((row, index) => (
+                                : groups
+                            )?.map((row, index) => (
                                 <TableRow key={row.id}>
                                     <TableCellStyled width="6%">
                                         {index + page * rowsPerPage}
@@ -73,23 +74,16 @@ export default function TimeEventsList() {
                                         {row.description}
                                     </TableCellStyled>
                                     <TableCellStyled width="15%">
-                                        {row.startDate}
+                                        <UsersContainerStyled>
+                                            {row?.users.map((user) => (
+                                                <GroupUserComponent
+                                                    user={user}
+                                                />
+                                            ))}
+                                        </UsersContainerStyled>
                                     </TableCellStyled>
                                     <TableCellStyled width="15%">
-                                        {row.endDate}
-                                    </TableCellStyled>
-                                    <TableCellStyled width="15%">
-                                        <EventIconComponent
-                                            eventIcon={{
-                                                type: row.iconType,
-                                                source: row.iconSource,
-                                            }}
-                                        />
-                                    </TableCellStyled>
-                                    <TableCellStyled width="15%">
-                                        <TimeEventActionsDropdown
-                                            timeEvent={row}
-                                        />
+                                        <GroupActionsDropdown group={row} />
                                     </TableCellStyled>
                                 </TableRow>
                             ))}
@@ -108,7 +102,7 @@ export default function TimeEventsList() {
                                         { label: 'All', value: -1 },
                                     ]}
                                     colSpan={3}
-                                    count={timeEvents.length}
+                                    count={groups.length}
                                     rowsPerPage={rowsPerPage}
                                     page={page}
                                     SelectProps={{
