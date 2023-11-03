@@ -1,7 +1,7 @@
 import { CHANGE_PASSWORD_URL, SIGN_IN_URL, SIGN_UP_URL } from './APIConstants'
 import { request } from './API'
-import { ChangePasswordRequest } from '../Components/Forms/types'
-import { DiceBearAvatarCategory } from '../utils/user/AvatarUtils'
+import { ChangePasswordRequest } from '@/Components/Forms/types'
+import { DiceBearAvatarCategory } from '@/utils/user/AvatarUtils'
 
 export type SignInRequest = {
     email: FormDataEntryValue | null

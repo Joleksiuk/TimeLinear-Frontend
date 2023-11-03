@@ -1,6 +1,6 @@
+import { Validation } from '@/services/Validation'
 import TextField from '@mui/material/TextField'
 import { useState } from 'react'
-import { Validation } from '../../services/Validation'
 
 export default function UsernameField() {
     const [isValidUsername, setIsValidUsername] = useState<boolean>(true)

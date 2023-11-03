@@ -1,3 +1,4 @@
+import { Validation } from '@/services/Validation'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
 import {
     FormControl,
@@ -8,7 +9,6 @@ import {
     FormHelperText,
 } from '@mui/material'
 import { useState } from 'react'
-import { Validation } from '../../services/Validation'
 
 type Props = {
     type: 'current-password' | 'new-password' | 'password' | 'repeat-password'

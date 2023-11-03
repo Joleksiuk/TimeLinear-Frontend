@@ -1,10 +1,11 @@
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
+import { useEffect, useState } from 'react'
 import { Group } from '../GroupTypes'
 import { useGroupsContext } from '../GroupsProvider'
-import { useSingleTimelineContext } from '../../Timeline/TimelineProvider/SingleTimelineProvider'
-import TimelineService from '../../Timeline/TimelineProvider/TimelineService'
-import { TimelineModel } from '../../Timeline/TimelineProvider/types'
+import { TimelineModel } from '@/Components/Timeline/TimelineProvider/types'
+import TimelineService from '@/Components/Timeline/TimelineProvider/TimelineService'
+import { useSingleTimelineContext } from '@/Components/Timeline/TimelineProvider/SingleTimelineProvider'
 
 type GroupOption = {
     label: string

@@ -1,8 +1,8 @@
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
+import { useTimeEventsContext } from '@/Components/TimeEventList/TimeEventsProvider'
 import { TimeEvent } from '../types'
 import { useState } from 'react'
-import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'
 
 type TimeEventOption = {
     label: string

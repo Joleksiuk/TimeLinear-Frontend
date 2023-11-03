@@ -1,5 +1,5 @@
-import { request } from '../../services/API'
-import { TIME_EVENTS_OWNED, TIME_EVENT_URL } from '../../services/APIConstants'
+import { request } from '@/services/API'
+import { TIME_EVENTS_OWNED, TIME_EVENT_URL } from '@/services/APIConstants'
 import { TimeEvent, TimeEventsBulkResponse } from '../TimeEvent/types'
 
 export default {

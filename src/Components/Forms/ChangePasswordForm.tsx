@@ -5,10 +5,10 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
+import PasswordField from '@/Components/formFields/PasswordField'
 import { useState } from 'react'
 import { Alert, AlertTitle } from '@mui/material'
-import { changePassword } from '../../services/AuthService'
-import PasswordField from '../formFields/PasswordField'
+import { changePassword } from '@/services/AuthService'
 
 export default function ChangePasswordForm() {
     const [error, setError] = useState<string>('')

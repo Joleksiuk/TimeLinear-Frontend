@@ -5,12 +5,10 @@ import {
     AvatarImageStyled,
     ChangeAvatarContainerStyled,
 } from './ChangeAvatar.styled'
+import AvatarUtils, { DiceBearAvatarCategory } from '@/utils/user/AvatarUtils'
 import { Button } from '@mui/material'
 import UserService from '../UserSearch/UserService'
-import { UserModel } from '../../../services/AuthService'
-import AvatarUtils, {
-    DiceBearAvatarCategory,
-} from '../../../utils/user/AvatarUtils'
+import { UserModel } from '@/services/AuthService'
 
 type Props = {
     setLoggedUser: (value: UserModel) => void

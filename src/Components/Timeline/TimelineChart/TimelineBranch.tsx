@@ -1,9 +1,9 @@
+import EventIconComponent from '@/Components/IconSearch/EventIconComponent'
 import { TimelineEvent } from '../TimelineEvent'
 import TimelineBranchCircle from './TimelineBranchCircle'
 import { BranchContainerStyled, LineStyled } from './TimelineChart.styled'
 import TimelineData from './TimelineData'
 import { useTimelineChartContext } from './TimelineChartProvider'
-import EventIconComponent from '../../IconSearch/EventIconComponent'
 
 type BranchProps = {
     timelineEvent: TimelineEvent

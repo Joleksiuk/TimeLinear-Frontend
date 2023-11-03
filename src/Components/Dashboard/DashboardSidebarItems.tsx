@@ -5,7 +5,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import { useNavigate } from 'react-router-dom'
 import GroupIcon from '@mui/icons-material/Group'
-import { getCurrentUser } from '../../services/AuthService'
+import { getCurrentUser } from '@/services/AuthService'
 export default function DashboardSidebarItems() {
     const navigate = useNavigate()
 

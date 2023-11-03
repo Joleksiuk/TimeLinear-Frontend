@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { Group, GroupUser } from './GroupTypes'
 import GroupsService from './GroupsService'
-import { getCurrentUser } from '../../services/AuthService'
+import { getCurrentUser } from '@/services/AuthService'
 
 type GroupsContextProps = {
     isLoadingData: boolean

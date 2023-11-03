@@ -5,7 +5,7 @@ import DashboardSidebar from './DashboardSidebar'
 import DashboardPage from './DashboardPage'
 import { ThemeProvider } from '@mui/material/styles'
 import { DashboardContainer } from './Dashboard.styled'
-import { DefaultTheme } from '../../constants'
+import { DefaultTheme } from '@/constants/Theme'
 
 export default function Dashboard() {
     const [open, setOpen] = React.useState(false)

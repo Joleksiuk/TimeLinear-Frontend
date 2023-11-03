@@ -6,8 +6,8 @@ import {
     useState,
 } from 'react'
 import { TimelineModel } from './types'
+import { getCurrentUser } from '@/services/AuthService'
 import TimelineService from './TimelineService'
-import { getCurrentUser } from '../../../services/AuthService'
 
 type TimelinesContextProps = {
     isLoadingData: boolean

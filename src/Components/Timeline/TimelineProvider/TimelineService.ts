@@ -1,11 +1,11 @@
-import { request } from '../../../services/API'
+import { request } from '@/services/API'
 import {
-    TIMELINE_URL,
-    TIMELINE_OWNED,
+    TIMELINE_BROWSE_GROUP,
     TIMELINE_BULK_URL,
     TIMELINE_EVENTS_URL,
-    TIMELINE_BROWSE_GROUP,
-} from '../../../services/APIConstants'
+    TIMELINE_OWNED,
+    TIMELINE_URL,
+} from '@/services/APIConstants'
 import {
     TimelineBulkRequest,
     TimelineBulkResponse,

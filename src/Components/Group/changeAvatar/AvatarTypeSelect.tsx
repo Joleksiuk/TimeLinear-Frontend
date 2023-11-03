@@ -1,9 +1,9 @@
-import { Autocomplete, TextField } from '@mui/material'
-import { useState } from 'react'
 import {
     DiceBearAvatarCategory,
     diceBearAvatarCategories,
-} from '../../../utils/user/AvatarUtils'
+} from '@/utils/user/AvatarUtils'
+import { Autocomplete, TextField } from '@mui/material'
+import { useState } from 'react'
 
 type Props = {
     setAvatarType: (value: DiceBearAvatarCategory) => void
