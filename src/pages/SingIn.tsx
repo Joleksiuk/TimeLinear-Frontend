@@ -7,12 +7,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
-import PasswordField from '@/Components/formFields/PasswordField'
-import EmailField from '@/Components/formFields/EmailField'
-import { login } from '@/services/AuthService'
 import { useState } from 'react'
 import { Alert, AlertTitle } from '@mui/material'
-import { homepageURL } from '@/services/APIConstants'
+import EmailField from '../Components/formFields/EmailField'
+import PasswordField from '../Components/formFields/PasswordField'
+import { homepageURL } from '../services/APIConstants'
+import { login } from '../services/AuthService'
 
 export default function SignIn() {
     const [showLoginError, setShowLoginError] = useState(false)

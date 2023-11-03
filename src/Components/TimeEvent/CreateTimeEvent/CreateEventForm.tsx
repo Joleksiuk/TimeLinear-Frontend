@@ -5,20 +5,17 @@ import { TextField, Button, Typography } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import {
-    ContainerStyled,
-    IconFormContainerStyled,
-} from './CreateEventForm.styled'
-import { request } from '@/services/API'
-import { TIME_EVENT_URL } from '@/services/APIConstants'
+import { ContainerStyled } from './CreateEventForm.styled'
 import Snackbar from '@mui/material/Snackbar'
 import { CreateEventRequest, TimeEvent } from '../types'
 import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
-import { useSingleTimelineContext } from '@/Components/Timeline/TimelineProvider/SingleTimelineProvider'
-import DateUtils from '@/utils/DateUtils'
-import { EventIcon } from '@/Components/IconSearch/types'
-import IconSearchDialog from '@/Components/IconSearch/IconSearchDialog'
+import { request } from '../../../services/API'
+import { TIME_EVENT_URL } from '../../../services/APIConstants'
+import DateUtils from '../../../utils/DateUtils'
+import IconSearchDialog from '../../IconSearch/IconSearchDialog'
+import { EventIcon } from '../../IconSearch/types'
+import { useSingleTimelineContext } from '../../Timeline/TimelineProvider/SingleTimelineProvider'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     function Alert(props, ref) {

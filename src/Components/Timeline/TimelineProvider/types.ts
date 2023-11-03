@@ -1,4 +1,4 @@
-import { Group } from '@/Components/Group/GroupTypes'
+import { Group } from '../../Group/GroupTypes'
 import { TimeEvent } from '../../TimeEvent/types'
 
 export type TimelineModel = {

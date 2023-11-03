@@ -8,8 +8,8 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import EditIcon from '@mui/icons-material/Edit'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { TimeEvent } from '../types'
-import TimeEventListService from '@/Components/TimeEventList/TimeEventListService'
-import { useTimeEventsContext } from '@/Components/TimeEventList/TimeEventsProvider'
+import TimeEventListService from '../../TimeEventList/TimeEventListService'
+import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'
 
 type Props = {
     timeEvent: TimeEvent

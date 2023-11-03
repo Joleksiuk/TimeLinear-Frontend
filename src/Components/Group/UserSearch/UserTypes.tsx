@@ -1,4 +1,4 @@
-import { DiceBearAvatarCategory } from '@/utils/user/AvatarUtils'
+import { DiceBearAvatarCategory } from '../../../utils/user/AvatarUtils'
 
 export type ChangeAvatarRequest = {
     avatarSeed: string

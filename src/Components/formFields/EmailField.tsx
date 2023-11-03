@@ -1,6 +1,6 @@
-import { Validation } from '@/services/Validation'
 import { TextField } from '@mui/material'
 import { useState } from 'react'
+import { Validation } from '../../services/Validation'
 
 export default function EmailField() {
     const [isValidEmail, setIsValidEmail] = useState<boolean>(true)

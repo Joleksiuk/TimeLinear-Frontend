@@ -1,4 +1,12 @@
-import { request } from '@/services/API'
+import { request } from '../../services/API'
+import {
+    GROUPS_URL,
+    GROUPS_OWNED_URL,
+    USERS_URL,
+    GROUPS_BULK_URL,
+    GROUPS_ADD_USERS,
+    GROUPS_REMOVE_USERS,
+} from '../../services/APIConstants'
 import {
     Group,
     GroupBulkRequest,
@@ -7,14 +15,6 @@ import {
     GroupUserBulkResponse,
     GroupUsersActionRequest,
 } from './GroupTypes'
-import {
-    GROUPS_ADD_USERS,
-    GROUPS_BULK_URL,
-    GROUPS_OWNED_URL,
-    GROUPS_REMOVE_USERS,
-    GROUPS_URL,
-    USERS_URL,
-} from '@/services/APIConstants'
 
 export default {
     async createGroup(groupRequestData: GroupRequest): Promise<Group> {

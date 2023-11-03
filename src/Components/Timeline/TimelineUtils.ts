@@ -1,6 +1,6 @@
+import DateUtils from '../../utils/DateUtils'
 import { TimeEvent } from '../TimeEvent/types'
 import { TimelineEvent } from './TimelineEvent'
-import DateUtils from '@/utils/DateUtils'
 
 export default {
     mapTimeEventToTimelineEvent(timeEvent: TimeEvent): TimelineEvent {

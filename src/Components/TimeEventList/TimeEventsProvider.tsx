@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { TimeEvent } from '../TimeEvent/types'
 import TimeEventListService from './TimeEventListService'
-import { getCurrentUser } from '@/services/AuthService'
+import { getCurrentUser } from '../../services/AuthService'
 
 type TimeEventsContextProps = {
     isLoadingData: boolean

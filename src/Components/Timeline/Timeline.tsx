@@ -14,10 +14,8 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { useState } from 'react'
 import { TimeEvent } from '../TimeEvent/types'
 import Button from '@mui/material/Button'
-import { Group } from '../Group/GroupTypes'
 import { Divider, Typography } from '@mui/material'
 import GroupSearch from '../Group/search/GroupSearch'
-import { getCurrentUser } from '@/services/AuthService'
 
 const timelineChartParameters = {
     rootCircleRadius: 100,
