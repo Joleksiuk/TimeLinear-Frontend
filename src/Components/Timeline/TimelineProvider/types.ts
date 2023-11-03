@@ -7,7 +7,7 @@ export type TimelineModel = {
     description: string
     creationDate: string
     timeEvents: Array<TimeEvent>
-    allowedToBrowse: Group
+    group: Group
     ownerEmail: string
 }
 

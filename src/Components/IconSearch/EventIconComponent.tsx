@@ -4,12 +4,14 @@ import { EventIcon } from './types'
 type Props = {
     eventIcon: EventIcon | undefined
     style?: any
+    display?: boolean
 }
 
 const defaultStyle = { width: '70px', height: '70px' }
 export default function EventIconComponent({
     eventIcon,
     style = defaultStyle,
+    display = true,
 }: Props) {
     const getChosenIcon = (): JSX.Element => {
         if (
@@ -35,5 +37,5 @@ export default function EventIconComponent({
         }
         return <div></div>
     }
-    return <>{getChosenIcon()}</>
+    return <>{display ? getChosenIcon() : <div style={defaultStyle}></div>}</>
 }

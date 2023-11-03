@@ -14,8 +14,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     }
 )
 
-const MAX_NAME_LENGTH = 10
-const MAX_DESCRIPTION_LENGTH = 10
+const MAX_NAME_LENGTH = 100
+const MAX_DESCRIPTION_LENGTH = 255
 
 export default function CreateTimelineForm() {
     const { timelines, setTimelines, setIsLoadingData } = useTimelineContext()

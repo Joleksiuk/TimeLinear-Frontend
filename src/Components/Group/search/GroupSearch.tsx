@@ -19,21 +19,16 @@ type Props = {
 export default function GroupSearch({ timeline }: Props) {
     const { groups } = useGroupsContext()
     const { setTimeline } = useSingleTimelineContext()
-    const [value, setValue] = useState<GroupOption>()
 
-    useEffect(() => {
-        const permissionGroup = groups.filter(
-            (value) => value.id === timeline.allowedToBrowse.id
-        )
-        if (permissionGroup.length > 0) {
-            const thisGroup = permissionGroup.at(0)
-            if (thisGroup !== undefined)
-                setValue({
-                    label: thisGroup.name,
-                    group: thisGroup,
-                })
+    const getDefaultValue = () => {
+        if (timeline.group === null) {
+            return null
         }
-    }, [])
+        return {
+            label: timeline.group.name,
+            group: timeline.group,
+        }
+    }
 
     const mapGroupsToOption = (): Array<GroupOption> => {
         return groups.map((group) => {
@@ -44,21 +39,23 @@ export default function GroupSearch({ timeline }: Props) {
         })
     }
 
-    const handleValueChange = async () => {
-        if (value !== undefined)
+    const handleValueChange = async (newValue: GroupOption) => {
+        if (newValue !== undefined)
             await TimelineService.setAllowedToBrowseGroup({
-                groupId: value?.group.id,
+                groupId: newValue?.group.id,
                 timelineId: timeline.id,
             })
 
+        console.log(groups)
+        console.log(timeline)
         const permissionGroup = groups.filter(
-            (value) => value.id === timeline.allowedToBrowse.id
+            (value) => value.id === newValue.group.id
         )
         if (permissionGroup.length > 0) {
             const thisGroup = permissionGroup.at(0)
             if (thisGroup !== undefined) {
                 const updatedTimeline = { ...timeline }
-                updatedTimeline.allowedToBrowse = thisGroup
+                updatedTimeline.group = thisGroup
                 setTimeline(updatedTimeline)
             }
         }
@@ -69,11 +66,10 @@ export default function GroupSearch({ timeline }: Props) {
             disablePortal
             id="groups-search"
             options={mapGroupsToOption()}
-            defaultValue={value}
             onChange={(event: any, newValue: any) => {
-                setValue(newValue)
-                handleValueChange()
+                handleValueChange(newValue)
             }}
+            defaultValue={getDefaultValue()}
             sx={{ width: 400 }}
             renderInput={(params) => (
                 <TextField

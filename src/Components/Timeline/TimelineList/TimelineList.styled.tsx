@@ -5,11 +5,13 @@ export const ContainerStyled = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: flex-end;
 `
 
 export const ItemStyled = styled.div`
     padding: 20px;
-    max-height: 300px;
+    height: 300px;
+    width: 600px;
     overflow: hidden;
     box-shadow:
         rgba(0, 0, 0, 0.07) 0px 1px 2px,

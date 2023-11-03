@@ -7,6 +7,7 @@ export type Parameters = {
     branchWidth: number
     branchHeight: number
     dataFontSize: number
+    iconSize: number
 }
 
 const DefaultParameters: Parameters = {
@@ -16,6 +17,7 @@ const DefaultParameters: Parameters = {
     branchWidth: 10,
     branchHeight: 70,
     dataFontSize: 30,
+    iconSize: 70,
 }
 
 type TimelineChartContextProps = {

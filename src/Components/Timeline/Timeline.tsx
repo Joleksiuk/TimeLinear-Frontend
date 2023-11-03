@@ -26,6 +26,7 @@ const timelineChartParameters = {
     branchWidth: 20,
     branchHeight: 200,
     dataFontSize: 30,
+    iconSize: 70,
 }
 export default function Timeline() {
     const { canEdit, timeline, isLoadingData, addEventToTimeline } =
