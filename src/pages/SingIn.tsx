@@ -12,7 +12,7 @@ import EmailField from '@/Components/formFields/EmailField'
 import { login } from '@/services/AuthService'
 import { useState } from 'react'
 import { Alert, AlertTitle } from '@mui/material'
-import { homepageURL } from '@/constants/Variables'
+import { homepageURL } from '@/services/APIConstants'
 
 export default function SignIn() {
     const [showLoginError, setShowLoginError] = useState(false)

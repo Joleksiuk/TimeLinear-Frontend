@@ -10,8 +10,8 @@ import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
 import { getCurrentUser } from '@/services/AuthService'
 import { Typography } from '@mui/material'
-import { homepageURL } from '@/constants/Variables'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { homepageURL } from '@/services/APIConstants'
 
 export default function NotLoggedAccountDropdown() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)

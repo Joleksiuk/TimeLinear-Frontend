@@ -11,8 +11,8 @@ import PasswordIcon from '@mui/icons-material/Password'
 import Logout from '@mui/icons-material/Logout'
 import { getCurrentUser, logout } from '@/services/AuthService'
 import { Typography } from '@mui/material'
-import { homepageURL } from '@/constants/Variables'
 import AvatarUtils from '@/utils/user/AvatarUtils'
+import { homepageURL } from '@/services/APIConstants'
 
 export default function LoggedAccountDropdown() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
