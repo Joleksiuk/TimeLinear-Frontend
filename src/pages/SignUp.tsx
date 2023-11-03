@@ -7,12 +7,12 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { SIGN_UP_URL } from '@/Services/APIConstants'
 import { noAuthRequest } from '@/Services/API'
-import UsernameField from '@/Components/formFields/UsernameField'
-import PasswordField from '@/Components/formFields/PasswordField'
-import EmailField from '@/Components/formFields/EmailField'
+import UsernameField from '@/Components/FormFields/UsernameField'
+import PasswordField from '@/Components/FormFields/PasswordField'
+import EmailField from '@/Components/FormFields/EmailField'
 import { useNavigate } from 'react-router-dom'
+import { SIGN_UP_URL } from '@/Services/APIConstants'
 
 export default function SignUp() {
     const navigate = useNavigate()

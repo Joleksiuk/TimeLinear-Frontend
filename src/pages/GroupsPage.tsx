@@ -1,4 +1,4 @@
-import GroupsPageLayout from '@/Components/Group/page/GroupsPageLayout'
+import GroupsPageLayout from '@/Components/Group/Page/GroupsPageLayout'
 import { getCurrentUser } from '@/Services/AuthService'
 import SignIn from './SingIn'
 

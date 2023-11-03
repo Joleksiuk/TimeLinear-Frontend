@@ -1,7 +1,7 @@
 import {
     DiceBearAvatarCategory,
     diceBearAvatarCategories,
-} from '@/utils/user/AvatarUtils'
+} from '@/Utils/User/AvatarUtils'
 import { Autocomplete, TextField } from '@mui/material'
 import { useState } from 'react'
 

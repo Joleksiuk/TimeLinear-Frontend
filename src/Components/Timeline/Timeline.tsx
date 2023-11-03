@@ -16,7 +16,7 @@ import { TimeEvent } from '../TimeEvent/types'
 import Button from '@mui/material/Button'
 import { Group } from '../Group/GroupTypes'
 import { Divider, Typography } from '@mui/material'
-import GroupSearch from '../Group/search/GroupSearch'
+import GroupSearch from '../Group/Search/GroupSearch'
 import { getCurrentUser } from '@/Services/AuthService'
 
 const timelineChartParameters = {

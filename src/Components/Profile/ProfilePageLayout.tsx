@@ -1,9 +1,9 @@
 import { ProfilePageContainerStyled } from './ProfilePageLayout.styled'
-import AvatarUtils, { DiceBearAvatarCategory } from '@/utils/user/AvatarUtils'
+import AvatarUtils, { DiceBearAvatarCategory } from '@/Utils/User/AvatarUtils'
 import { useEffect, useState } from 'react'
 import { getCurrentUser } from '@/Services/AuthService'
 import { CircularProgress } from '@mui/material'
-import AvatarChangeDialog from '../Group/changeAvatar/AvatarChangeDialog'
+import AvatarChangeDialog from '../Group/ChangeAvatar/AvatarChangeDialog'
 
 type UserModel = {
     email: string

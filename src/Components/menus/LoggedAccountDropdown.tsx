@@ -11,7 +11,7 @@ import PasswordIcon from '@mui/icons-material/Password'
 import Logout from '@mui/icons-material/Logout'
 import { getCurrentUser, logout } from '@/Services/AuthService'
 import { Typography } from '@mui/material'
-import AvatarUtils from '@/utils/user/AvatarUtils'
+import AvatarUtils from '@/Utils/User/AvatarUtils'
 import { homepageURL } from '@/Services/APIConstants'
 
 export default function LoggedAccountDropdown() {

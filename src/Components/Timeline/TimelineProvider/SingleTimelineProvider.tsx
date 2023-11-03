@@ -10,7 +10,7 @@ import { getCurrentUser } from '@/Services/AuthService'
 import TimelineService from './TimelineService'
 import { useParams } from 'react-router-dom'
 import { TimeEvent } from '@/Components/TimeEvent/types'
-import DateUtils from '@/utils/DateUtils'
+import DateUtils from '@/Utils/DateUtils'
 
 type SignleTimelineContextProps = {
     isLoadingData: boolean

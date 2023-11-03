@@ -5,7 +5,7 @@ import {
     AvatarImageStyled,
     ChangeAvatarContainerStyled,
 } from './ChangeAvatar.styled'
-import AvatarUtils, { DiceBearAvatarCategory } from '@/utils/user/AvatarUtils'
+import AvatarUtils, { DiceBearAvatarCategory } from '@/Utils/User/AvatarUtils'
 import { Button } from '@mui/material'
 import UserService from '../UserSearch/UserService'
 import { UserModel } from '@/Services/AuthService'

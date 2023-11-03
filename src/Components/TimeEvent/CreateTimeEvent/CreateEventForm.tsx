@@ -16,7 +16,7 @@ import { CreateEventRequest, TimeEvent } from '../types'
 import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
 import { useSingleTimelineContext } from '@/Components/Timeline/TimelineProvider/SingleTimelineProvider'
-import DateUtils from '@/utils/DateUtils'
+import DateUtils from '@/Utils/DateUtils'
 import { EventIcon } from '@/Components/IconSearch/types'
 import IconSearchDialog from '@/Components/IconSearch/IconSearchDialog'
 

@@ -1,10 +1,10 @@
 import CreateEventForm from '@/Components/TimeEvent/CreateTimeEvent/CreateEventForm'
 import { EventFormContainerStyled } from '@/Components/TimeEvent/CreateTimeEvent/CreateEventForm.styled'
 import { getCurrentUser } from '@/Services/AuthService'
-import SignIn from './SingIn'
 import TimeEventsList from '@/Components/TimeEventList/TimeEventsList'
 import { TimeEventsProvider } from '@/Components/TimeEventList/TimeEventsProvider'
 import CreateTimeEventModal from '@/Components/TimeEvent/CreateTimeEvent/CreateTimeEventModal'
+import SignIn from './SingIn'
 
 export default function EventsListPage() {
     return (
