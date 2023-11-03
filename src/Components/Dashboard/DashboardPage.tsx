@@ -1,6 +1,6 @@
 import { Box, Toolbar, Container } from '@mui/material'
 import { Outlet } from 'react-router-dom'
-import { Colors } from '@/constants/Colors'
+import { Colors } from '@/Constants/Colors'
 import styled from 'styled-components'
 
 export const PageContainerStyled = styled.div`

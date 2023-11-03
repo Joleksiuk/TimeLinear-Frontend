@@ -9,10 +9,10 @@ import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
 import PasswordField from '@/Components/formFields/PasswordField'
 import EmailField from '@/Components/formFields/EmailField'
-import { login } from '@/services/AuthService'
+import { login } from '@/Services/AuthService'
 import { useState } from 'react'
 import { Alert, AlertTitle } from '@mui/material'
-import { homepageURL } from '@/services/APIConstants'
+import { homepageURL } from '@/Services/APIConstants'
 
 export default function SignIn() {
     const [showLoginError, setShowLoginError] = useState(false)

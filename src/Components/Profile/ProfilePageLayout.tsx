@@ -1,7 +1,7 @@
 import { ProfilePageContainerStyled } from './ProfilePageLayout.styled'
 import AvatarUtils, { DiceBearAvatarCategory } from '@/utils/user/AvatarUtils'
 import { useEffect, useState } from 'react'
-import { getCurrentUser } from '@/services/AuthService'
+import { getCurrentUser } from '@/Services/AuthService'
 import { CircularProgress } from '@mui/material'
 import AvatarChangeDialog from '../Group/changeAvatar/AvatarChangeDialog'
 

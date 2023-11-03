@@ -9,8 +9,8 @@ import {
     ContainerStyled,
     IconFormContainerStyled,
 } from './CreateEventForm.styled'
-import { request } from '@/services/API'
-import { TIME_EVENT_URL } from '@/services/APIConstants'
+import { request } from '@/Services/API'
+import { TIME_EVENT_URL } from '@/Services/APIConstants'
 import Snackbar from '@mui/material/Snackbar'
 import { CreateEventRequest, TimeEvent } from '../types'
 import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'

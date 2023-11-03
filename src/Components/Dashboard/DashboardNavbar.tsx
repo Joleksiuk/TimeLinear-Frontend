@@ -1,9 +1,9 @@
 import { Toolbar, IconButton, Typography, Link } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar } from './Dashboard.styled'
-import LoggedAccountDropdown from '../menus/LoggedAccountDropdown'
-import { getCurrentUser } from '@/services/AuthService'
-import NotLoggedAccountDropdown from '../menus/NotLoggedAccountDropdown'
+import LoggedAccountDropdown from '../Menus/LoggedAccountDropdown'
+import { getCurrentUser } from '@/Services/AuthService'
+import NotLoggedAccountDropdown from '../Menus/NotLoggedAccountDropdown'
 
 type Props = {
     toggleDrawer: () => void

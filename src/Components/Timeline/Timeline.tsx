@@ -17,7 +17,7 @@ import Button from '@mui/material/Button'
 import { Group } from '../Group/GroupTypes'
 import { Divider, Typography } from '@mui/material'
 import GroupSearch from '../Group/search/GroupSearch'
-import { getCurrentUser } from '@/services/AuthService'
+import { getCurrentUser } from '@/Services/AuthService'
 
 const timelineChartParameters = {
     rootCircleRadius: 100,

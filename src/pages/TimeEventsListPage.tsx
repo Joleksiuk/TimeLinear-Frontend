@@ -1,6 +1,6 @@
 import CreateEventForm from '@/Components/TimeEvent/CreateTimeEvent/CreateEventForm'
 import { EventFormContainerStyled } from '@/Components/TimeEvent/CreateTimeEvent/CreateEventForm.styled'
-import { getCurrentUser } from '@/services/AuthService'
+import { getCurrentUser } from '@/Services/AuthService'
 import SignIn from './SingIn'
 import TimeEventsList from '@/Components/TimeEventList/TimeEventsList'
 import { TimeEventsProvider } from '@/Components/TimeEventList/TimeEventsProvider'

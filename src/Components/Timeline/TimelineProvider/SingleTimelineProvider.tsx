@@ -6,7 +6,7 @@ import {
     useState,
 } from 'react'
 import { TimelineModel, TimelineTimeEventBean } from './types'
-import { getCurrentUser } from '@/services/AuthService'
+import { getCurrentUser } from '@/Services/AuthService'
 import TimelineService from './TimelineService'
 import { useParams } from 'react-router-dom'
 import { TimeEvent } from '@/Components/TimeEvent/types'

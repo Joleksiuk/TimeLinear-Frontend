@@ -8,7 +8,7 @@ import Container from '@mui/material/Container'
 import PasswordField from '@/Components/formFields/PasswordField'
 import { useState } from 'react'
 import { Alert, AlertTitle } from '@mui/material'
-import { changePassword } from '@/services/AuthService'
+import { changePassword } from '@/Services/AuthService'
 
 export default function ChangePasswordForm() {
     const [error, setError] = useState<string>('')

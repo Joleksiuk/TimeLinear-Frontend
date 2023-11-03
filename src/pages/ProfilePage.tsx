@@ -1,4 +1,4 @@
-import { getCurrentUser } from '@/services/AuthService'
+import { getCurrentUser } from '@/Services/AuthService'
 import SignIn from './SingIn'
 import ProfilePageLayout from '@/Components/Profile/ProfilePageLayout'
 

@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal'
 import Fade from '@mui/material/Fade'
 import { Button } from '@mui/material'
 import ChangeAvatarForm from './ChangeAvatarForm'
-import { UserModel } from '@/services/AuthService'
+import { UserModel } from '@/Services/AuthService'
 
 type Props = {
     setLoggedUser: (value: UserModel) => void

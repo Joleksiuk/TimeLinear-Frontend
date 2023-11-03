@@ -6,7 +6,7 @@ import {
     useState,
 } from 'react'
 import { TimelineModel } from './types'
-import { getCurrentUser } from '@/services/AuthService'
+import { getCurrentUser } from '@/Services/AuthService'
 import TimelineService from './TimelineService'
 
 type TimelinesContextProps = {

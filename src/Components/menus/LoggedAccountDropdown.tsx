@@ -9,10 +9,10 @@ import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import PasswordIcon from '@mui/icons-material/Password'
 import Logout from '@mui/icons-material/Logout'
-import { getCurrentUser, logout } from '@/services/AuthService'
+import { getCurrentUser, logout } from '@/Services/AuthService'
 import { Typography } from '@mui/material'
 import AvatarUtils from '@/utils/user/AvatarUtils'
-import { homepageURL } from '@/services/APIConstants'
+import { homepageURL } from '@/Services/APIConstants'
 
 export default function LoggedAccountDropdown() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)

@@ -1,7 +1,7 @@
-import { request } from '@/services/API'
+import { request } from '@/Services/API'
 import { ChangeAvatarRequest, UserResponse } from './UserTypes'
-import { USERS_CHANGE_AVATAR_URL } from '@/services/APIConstants'
-import { UserModel, getCurrentUser } from '@/services/AuthService'
+import { USERS_CHANGE_AVATAR_URL } from '@/Services/APIConstants'
+import { UserModel, getCurrentUser } from '@/Services/AuthService'
 
 export default {
     async changeAvatar(requestData: ChangeAvatarRequest): Promise<UserModel> {

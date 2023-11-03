@@ -1,4 +1,4 @@
-import { request } from '@/services/API'
+import { request } from '@/Services/API'
 import {
     Group,
     GroupBulkRequest,
@@ -14,7 +14,7 @@ import {
     GROUPS_REMOVE_USERS,
     GROUPS_URL,
     USERS_URL,
-} from '@/services/APIConstants'
+} from '@/Services/APIConstants'
 
 export default {
     async createGroup(groupRequestData: GroupRequest): Promise<Group> {
