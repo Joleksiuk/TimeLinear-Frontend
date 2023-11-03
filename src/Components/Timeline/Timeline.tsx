@@ -3,6 +3,7 @@ import CreateEventForm from '../TimeEvent/CreateTimeEvent/CreateEventForm'
 import {
     EventCreationContainer,
     GridColumnContainer,
+    HeaderContainerStyled,
     MainContainerStyled,
 } from './Timeline.styled'
 import { TimeEventsProvider } from '../TimeEventList/TimeEventsProvider'
@@ -13,6 +14,10 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { useState } from 'react'
 import { TimeEvent } from '../TimeEvent/types'
 import Button from '@mui/material/Button'
+import { Group } from '../Group/GroupTypes'
+import { Divider, Typography } from '@mui/material'
+import GroupSearch from '../Group/search/GroupSearch'
+import { getCurrentUser } from '@/services/AuthService'
 
 const timelineChartParameters = {
     rootCircleRadius: 100,
@@ -23,9 +28,8 @@ const timelineChartParameters = {
     dataFontSize: 30,
 }
 export default function Timeline() {
-    const { timeline, isLoadingData, addEventToTimeline } =
+    const { canEdit, timeline, isLoadingData, addEventToTimeline } =
         useSingleTimelineContext()
-
     const [eventSearchValue, setEventSearchValue] = useState<TimeEvent>()
 
     const handleAddEventToTimeline = () => {
@@ -33,6 +37,7 @@ export default function Timeline() {
             addEventToTimeline(eventSearchValue)
         }
     }
+
     return (
         <div>
             {isLoadingData ? (
@@ -41,23 +46,52 @@ export default function Timeline() {
                 <div>No timeline with this exists!</div>
             ) : (
                 <TimeEventsProvider>
+                    <HeaderContainerStyled>
+                        <Typography
+                            sx={{
+                                color: '#4c58aa',
+                                fontSize: '40px',
+                                wordWrap: 'break-word',
+                            }}
+                        >
+                            {timeline.name}
+                        </Typography>
+                        <Typography
+                            sx={{
+                                color: '#5d6074',
+                                fontSize: '20px',
+                                wordWrap: 'break-word',
+                            }}
+                        >
+                            {timeline.description}
+                        </Typography>
+                        {canEdit && <GroupSearch timeline={timeline} />}
+                    </HeaderContainerStyled>
                     <MainContainerStyled>
-                        <EventCreationContainer>
-                            <CreateEventForm isInModal={false} />
-                            <div> OR </div>
-                            <GridColumnContainer>
-                                <TimeEventsSearch
-                                    setEventValue={setEventSearchValue}
-                                />
-                                <Button
-                                    variant="contained"
-                                    onClick={handleAddEventToTimeline}
-                                >
-                                    Add to timeline
-                                </Button>
-                            </GridColumnContainer>
-                        </EventCreationContainer>
-
+                        {canEdit && (
+                            <MainContainerStyled>
+                                <Divider orientation="horizontal" flexItem>
+                                    Add event to timeline
+                                </Divider>
+                                <EventCreationContainer>
+                                    <CreateEventForm isInModal={false} />
+                                    <Divider orientation="vertical" flexItem>
+                                        OR
+                                    </Divider>
+                                    <GridColumnContainer>
+                                        <TimeEventsSearch
+                                            setEventValue={setEventSearchValue}
+                                        />
+                                        <Button
+                                            variant="contained"
+                                            onClick={handleAddEventToTimeline}
+                                        >
+                                            Add to timeline
+                                        </Button>
+                                    </GridColumnContainer>
+                                </EventCreationContainer>
+                            </MainContainerStyled>
+                        )}
                         <TimelineChart
                             parameters={timelineChartParameters}
                             events={

@@ -37,7 +37,7 @@ const TimelinesProvider = ({ children }: Props) => {
 
     const initData = async () => {
         setIsLoadingData(true)
-        const response = await TimelineService.getOwnedTimelines()
+        const response = await TimelineService.getAvailableTimelines()
         setTimelines(response.timelines)
         setIsLoadingData(false)
     }

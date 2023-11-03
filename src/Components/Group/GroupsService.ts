@@ -4,11 +4,16 @@ import {
     GroupBulkRequest,
     GroupBulkResponse,
     GroupRequest,
+    GroupUserBulkResponse,
+    GroupUsersActionRequest,
 } from './GroupTypes'
 import {
+    GROUPS_ADD_USERS,
     GROUPS_BULK_URL,
     GROUPS_OWNED_URL,
+    GROUPS_REMOVE_USERS,
     GROUPS_URL,
+    USERS_URL,
 } from '@/services/APIConstants'
 
 export default {
@@ -17,11 +22,11 @@ export default {
         return response.data
     },
 
-    async updateGroup(timeline: Group, timelineId: number): Promise<Group> {
+    async updateGroup(group: Group): Promise<Group> {
         const response = await request(
-            `${GROUPS_URL}/${timelineId}`,
-            'DELETE',
-            timeline
+            `${GROUPS_URL}/${group.id}`,
+            'PUT',
+            group
         )
         return response.data
     },
@@ -40,6 +45,11 @@ export default {
         return response.data
     },
 
+    async getAllUsers(): Promise<GroupUserBulkResponse> {
+        const response = await request(USERS_URL, 'GET')
+        return response.data
+    },
+
     async getGroupsInBulk(
         groupsIds: Array<number>
     ): Promise<GroupBulkResponse> {
@@ -47,6 +57,16 @@ export default {
             groupsIds,
         }
         const response = await request(GROUPS_BULK_URL, 'GET', requestData)
+        return response.data
+    },
+
+    async addUsersToGroup(data: GroupUsersActionRequest): Promise<string> {
+        const response = await request(GROUPS_ADD_USERS, 'PUT', data)
+        return response.data
+    },
+
+    async removeUsersFromGroup(data: GroupUsersActionRequest): Promise<string> {
+        const response = await request(GROUPS_REMOVE_USERS, 'PUT', data)
         return response.data
     },
 }

@@ -15,7 +15,8 @@ import { TableCellStyled, UsersContainerStyled } from './GroupList.styled'
 import GroupActionsDropdown from './GroupActionDropdown'
 import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions'
 import GroupUserComponent from './GroupUserComponent'
-
+import { Group } from '../GroupTypes'
+import AddUserDialog from '../UserSearch/AddUserDialog'
 export default function GroupsList() {
     const { groups, isLoadingData } = useGroupsContext()
 
@@ -38,6 +39,7 @@ export default function GroupsList() {
         setRowsPerPage(parseInt(event.target.value, 10))
         setPage(0)
     }
+    const handleOnAddUser = (group: Group) => {}
 
     return (
         <div>
@@ -67,22 +69,24 @@ export default function GroupsList() {
                                     <TableCellStyled width="6%">
                                         {index + page * rowsPerPage}
                                     </TableCellStyled>
-                                    <TableCellStyled width="25%">
+                                    <TableCellStyled width="20%">
                                         {row.name}
                                     </TableCellStyled>
-                                    <TableCellStyled width="30%">
+                                    <TableCellStyled width="25%">
                                         {row.description}
                                     </TableCellStyled>
-                                    <TableCellStyled width="15%">
+                                    <TableCellStyled width="25%">
                                         <UsersContainerStyled>
                                             {row?.users.map((user) => (
                                                 <GroupUserComponent
                                                     user={user}
+                                                    group={row}
                                                 />
                                             ))}
+                                            <AddUserDialog group={row} />
                                         </UsersContainerStyled>
                                     </TableCellStyled>
-                                    <TableCellStyled width="15%">
+                                    <TableCellStyled width="14%">
                                         <GroupActionsDropdown group={row} />
                                     </TableCellStyled>
                                 </TableRow>

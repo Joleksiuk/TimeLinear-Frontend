@@ -1,5 +1,6 @@
 import { request } from '@/services/API'
 import {
+    TIMELINE_BROWSE_GROUP,
     TIMELINE_BULK_URL,
     TIMELINE_EVENTS_URL,
     TIMELINE_OWNED,
@@ -9,6 +10,7 @@ import {
     TimelineBulkRequest,
     TimelineBulkResponse,
     TimelineModel,
+    TimelinePermissionRequest,
     TimelinePostRequest,
     TimelineTimeEventBean,
 } from './types'
@@ -42,6 +44,11 @@ export default {
         return response.data
     },
 
+    async getAvailableTimelines(): Promise<TimelineBulkResponse> {
+        const response = await request(TIMELINE_URL, 'GET')
+        return response.data
+    },
+
     async getOwnedTimelines(): Promise<TimelineBulkResponse> {
         const response = await request(TIMELINE_OWNED, 'GET')
         return response.data
@@ -69,5 +76,11 @@ export default {
     ): Promise<TimelineModel> {
         const response = await request(TIMELINE_EVENTS_URL, 'DELETE', data)
         return response.data
+    },
+
+    async setAllowedToBrowseGroup(
+        data: TimelinePermissionRequest
+    ): Promise<void> {
+        await request(TIMELINE_BROWSE_GROUP, 'PUT', data)
     },
 }

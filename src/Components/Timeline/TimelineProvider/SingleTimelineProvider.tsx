@@ -10,11 +10,12 @@ import { getCurrentUser } from '@/services/AuthService'
 import TimelineService from './TimelineService'
 import { useParams } from 'react-router-dom'
 import { TimeEvent } from '@/Components/TimeEvent/types'
-import DateUtils from '@/utils/user/DateUtils'
+import DateUtils from '@/utils/DateUtils'
 
 type SignleTimelineContextProps = {
     isLoadingData: boolean
     timeline: TimelineModel | null
+    canEdit: boolean
     setTimeline: (timeline: TimelineModel) => void
     setIsLoadingData: (value: boolean) => void
     addEventToTimeline: (event: TimeEvent) => Promise<void>
@@ -23,6 +24,7 @@ type SignleTimelineContextProps = {
 const DefaultTimeEventsContext: SignleTimelineContextProps = {
     isLoadingData: false,
     timeline: null,
+    canEdit: false,
     setTimeline: (timeline: TimelineModel) => {},
     setIsLoadingData: (value: boolean) => {},
     addEventToTimeline: (event: TimeEvent) => Promise.resolve(),
@@ -39,6 +41,7 @@ type Props = {
 const SingleTimelineProvider = ({ children }: Props) => {
     const [isLoadingData, setIsLoadingData] = useState<boolean>(false)
     const [timeline, setTimeline] = useState<TimelineModel | null>(null)
+    const [canEdit, setCanEdit] = useState<boolean>(false)
     const { timelineId } = useParams()
 
     const initData = async () => {
@@ -47,7 +50,9 @@ const SingleTimelineProvider = ({ children }: Props) => {
             const responseTimeline = await TimelineService.getTimeline(
                 Number(timelineId)
             )
-            console.log(responseTimeline)
+            if (responseTimeline.ownerEmail === getCurrentUser()?.email) {
+                setCanEdit(true)
+            }
             setTimeline(responseTimeline)
         } catch (error) {
             setTimeline(null)
@@ -111,6 +116,7 @@ const SingleTimelineProvider = ({ children }: Props) => {
             value={{
                 isLoadingData: isLoadingData,
                 timeline: timeline,
+                canEdit: canEdit,
                 setTimeline: (timelineArg: TimelineModel) => {
                     setTimeline(timelineArg)
                 },

@@ -14,7 +14,14 @@ export const MainContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 100px;
+    gap: 60px;
+`
+
+export const HeaderContainerStyled = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
 `
 
 export const EventCreationContainer = styled.div`

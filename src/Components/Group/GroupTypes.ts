@@ -22,3 +22,12 @@ export type GroupBulkResponse = {
 export type GroupBulkRequest = {
     groupsIds: Array<number>
 }
+
+export type GroupUserBulkResponse = {
+    users: Array<GroupUser>
+}
+
+export type GroupUsersActionRequest = {
+    usersIds: Array<number>
+    groupId: number
+}

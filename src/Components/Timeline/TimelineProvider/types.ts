@@ -1,3 +1,4 @@
+import { Group } from '@/Components/Group/GroupTypes'
 import { TimeEvent } from '../../TimeEvent/types'
 
 export type TimelineModel = {
@@ -6,6 +7,8 @@ export type TimelineModel = {
     description: string
     creationDate: string
     timeEvents: Array<TimeEvent>
+    allowedToBrowse: Group
+    ownerEmail: string
 }
 
 export type TimelinePostRequest = {
@@ -24,4 +27,9 @@ export type TimelineBulkResponse = {
 
 export type TimelineBulkRequest = {
     timelineIds: Array<number>
+}
+
+export type TimelinePermissionRequest = {
+    groupId: number
+    timelineId: number
 }

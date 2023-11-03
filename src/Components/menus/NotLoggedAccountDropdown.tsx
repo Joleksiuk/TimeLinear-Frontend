@@ -11,6 +11,7 @@ import Logout from '@mui/icons-material/Logout'
 import { getCurrentUser } from '@/services/AuthService'
 import { Typography } from '@mui/material'
 import { homepageURL } from '@/constants/Variables'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 export default function NotLoggedAccountDropdown() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -42,7 +43,7 @@ export default function NotLoggedAccountDropdown() {
                 }}
             >
                 <Typography>
-                    {getCurrentUser() && getCurrentUser().email}
+                    {getCurrentUser() && getCurrentUser()?.email}
                 </Typography>
                 <Tooltip title="Account settings">
                     <IconButton
@@ -53,7 +54,9 @@ export default function NotLoggedAccountDropdown() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                        <Avatar sx={{ width: 32, height: 32 }}>
+                            <AccountCircleIcon />
+                        </Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>

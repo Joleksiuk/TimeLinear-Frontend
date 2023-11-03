@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { TimeEvent } from '../TimeEvent/types'
 import { TimelineEvent } from './TimelineEvent'
-import DateUtils from '@/utils/user/DateUtils'
+import DateUtils from '@/utils/DateUtils'
 
 export default {
     mapTimeEventToTimelineEvent(timeEvent: TimeEvent): TimelineEvent {

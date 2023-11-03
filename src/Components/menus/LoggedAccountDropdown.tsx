@@ -12,6 +12,7 @@ import Logout from '@mui/icons-material/Logout'
 import { getCurrentUser, logout } from '@/services/AuthService'
 import { Typography } from '@mui/material'
 import { homepageURL } from '@/constants/Variables'
+import AvatarUtils from '@/utils/user/AvatarUtils'
 
 export default function LoggedAccountDropdown() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -28,6 +29,10 @@ export default function LoggedAccountDropdown() {
         window.location.href = homepageURL + '/signIn'
     }
 
+    const handleGoToProfile = () => {
+        window.location.href = homepageURL + '/profile'
+    }
+
     const handleChangePassword = () => {
         window.location.href = homepageURL + '/changePassword'
     }
@@ -42,7 +47,7 @@ export default function LoggedAccountDropdown() {
                 }}
             >
                 <Typography>
-                    {getCurrentUser() && getCurrentUser().email}
+                    {getCurrentUser() && getCurrentUser()?.email}
                 </Typography>
                 <Tooltip title="Account settings">
                     <IconButton
@@ -53,7 +58,15 @@ export default function LoggedAccountDropdown() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                        <Avatar sx={{ width: 32, height: 32 }}>
+                            <img
+                                src={AvatarUtils.getAvatarUrl(
+                                    getCurrentUser()?.avatar_seed,
+                                    getCurrentUser()?.avatar_type
+                                )}
+                                alt=""
+                            />
+                        </Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -94,7 +107,7 @@ export default function LoggedAccountDropdown() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleGoToProfile}>
                     <Avatar /> Profile
                 </MenuItem>
                 <Divider />

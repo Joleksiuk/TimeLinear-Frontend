@@ -5,8 +5,6 @@ import Paper from '@mui/material/Paper'
 import InputBase from '@mui/material/InputBase'
 import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
-import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup'
-import { PopupBody } from './IconSearch.styledmui'
 import { IconContainerStyled, IconsContainer } from './IconSearch.styled'
 import { iconMapping } from './IconMapping'
 import { useState } from 'react'
@@ -67,23 +65,19 @@ export default function IconSearch({ setEventIcon }: Props) {
                     <SearchIcon />
                 </IconButton>
             </Paper>
-            <BasePopup id={id} open={open} anchor={anchor}>
-                <PopupBody>
-                    <IconsContainer>
-                        {iconNames
-                            .filter(filterNames)
-                            .slice(0, 100)
-                            .map((iconName) => (
-                                <IconContainerStyled
-                                    onClick={() => handleChooseIcon(iconName)}
-                                    key={iconName}
-                                >
-                                    {iconMapping[iconName]}
-                                </IconContainerStyled>
-                            ))}
-                    </IconsContainer>
-                </PopupBody>
-            </BasePopup>
+            <IconsContainer>
+                {iconNames
+                    .filter(filterNames)
+                    .slice(0, 100)
+                    .map((iconName) => (
+                        <IconContainerStyled
+                            onClick={() => handleChooseIcon(iconName)}
+                            key={iconName}
+                        >
+                            {iconMapping[iconName]}
+                        </IconContainerStyled>
+                    ))}
+            </IconsContainer>
         </div>
     )
 }

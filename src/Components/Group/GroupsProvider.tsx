@@ -5,22 +5,26 @@ import {
     useEffect,
     useState,
 } from 'react'
-import { Group } from './GroupTypes'
+import { Group, GroupUser } from './GroupTypes'
 import GroupsService from './GroupsService'
 import { getCurrentUser } from '@/services/AuthService'
 
 type GroupsContextProps = {
     isLoadingData: boolean
     groups: Array<Group>
+    users: Array<GroupUser>
     setIsLoadingData: (value: boolean) => void
     setGroups: (event: Array<Group>) => void
+    setUsers: (event: Array<GroupUser>) => void
 }
 
 const DefaultGroupsContext: GroupsContextProps = {
     isLoadingData: false,
     groups: [],
+    users: [],
     setIsLoadingData: (value: boolean) => {},
     setGroups: (event: Array<Group>) => {},
+    setUsers: (event: Array<GroupUser>) => {},
 }
 
 const GroupsContext = createContext<GroupsContextProps>(DefaultGroupsContext)
@@ -31,13 +35,15 @@ type Props = {
 
 const GroupsProvider = ({ children }: Props) => {
     const [groups, setGroups] = useState<Array<Group>>([])
+    const [users, setUsers] = useState<Array<GroupUser>>([])
     const [isLoadingData, setIsLoadingData] = useState<boolean>(true)
 
     const initData = async () => {
         setIsLoadingData(true)
-        const response = await GroupsService.getOwnedGroups()
-        console.log(response)
-        setGroups(response.groups)
+        const groupsResponse = await GroupsService.getOwnedGroups()
+        const usersResponse = await GroupsService.getAllUsers()
+        setGroups(groupsResponse.groups)
+        setUsers(usersResponse.users)
         setIsLoadingData(false)
     }
 
@@ -52,11 +58,15 @@ const GroupsProvider = ({ children }: Props) => {
             value={{
                 isLoadingData: isLoadingData,
                 groups: groups,
+                users: users,
                 setIsLoadingData: (value: boolean) => {
                     setIsLoadingData(value)
                 },
                 setGroups: (value: Array<Group>) => {
                     setGroups(value)
+                },
+                setUsers: (value: Array<GroupUser>) => {
+                    setUsers(value)
                 },
             }}
         >

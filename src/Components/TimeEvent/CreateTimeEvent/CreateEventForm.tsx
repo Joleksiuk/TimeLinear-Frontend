@@ -16,11 +16,9 @@ import { CreateEventRequest, TimeEvent } from '../types'
 import { useTimeEventsContext } from '../../TimeEventList/TimeEventsProvider'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
 import { useSingleTimelineContext } from '@/Components/Timeline/TimelineProvider/SingleTimelineProvider'
-import DateUtils from '@/utils/user/DateUtils'
-import EmojiPickerComponent from '@/Components/IconSearch/EmojiPickerComponent'
-import IconSearch from '@/Components/IconSearch/IconSearch'
+import DateUtils from '@/utils/DateUtils'
 import { EventIcon } from '@/Components/IconSearch/types'
-import EventIconComponent from '@/Components/IconSearch/EventIconComponent'
+import IconSearchDialog from '@/Components/IconSearch/IconSearchDialog'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     function Alert(props, ref) {
@@ -144,15 +142,10 @@ export default function CreateEventForm({ isInModal = false }: Props) {
                     }}
                     error={descriptionError}
                 />
-                <div>
-                    <Typography>Chosen icon:</Typography>
-                    {<EventIconComponent eventIcon={eventIcon} />}
-                </div>
-                <IconFormContainerStyled>
-                    <EmojiPickerComponent setEventIcon={setEventIcon} />
-                    <div>OR</div>
-                    <IconSearch setEventIcon={setEventIcon} />
-                </IconFormContainerStyled>
+                <IconSearchDialog
+                    eventIcon={eventIcon}
+                    setEventIcon={setEventIcon}
+                />
                 <Button
                     variant="contained"
                     color="primary"

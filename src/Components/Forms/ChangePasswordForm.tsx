@@ -12,7 +12,7 @@ import { changePassword } from '@/services/AuthService'
 
 export default function ChangePasswordForm() {
     const [error, setError] = useState<string>('')
-
+    const [passwordChanged, setPasswordChanged] = useState<boolean>(false)
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
@@ -29,6 +29,7 @@ export default function ChangePasswordForm() {
                 data.get('new-password')?.toString() || '',
                 data.get('repeat-password')?.toString() || ''
             )
+            setPasswordChanged(true)
         } catch (error) {
             setError('Invalid password')
         }
@@ -50,6 +51,18 @@ export default function ChangePasswordForm() {
                 <Typography component="h1" variant="h5">
                     Change password
                 </Typography>
+                {error !== '' && (
+                    <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        {error}
+                    </Alert>
+                )}
+                {passwordChanged && (
+                    <Alert severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        {'Password changed successfully!'}
+                    </Alert>
+                )}
                 {error !== '' && (
                     <Alert severity="error">
                         <AlertTitle>Error</AlertTitle>

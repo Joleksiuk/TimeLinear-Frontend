@@ -18,3 +18,13 @@ export const IconContainerStyled = styled.div`
         background-color: lightblue;
     }
 `
+
+export const IconButtonContainerStyled = styled.div`
+    display: flex;
+    align-items: center;
+    &:hover {
+        cursor: pointer;
+        background-color: '#2345';
+    }
+    gap: 30px;
+`
