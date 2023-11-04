@@ -45,9 +45,6 @@ export default function GroupSearch({ timeline }: Props) {
                 groupId: newValue?.group.id,
                 timelineId: timeline.id,
             })
-
-        console.log(groups)
-        console.log(timeline)
         const permissionGroup = groups.filter(
             (value) => value.id === newValue.group.id
         )

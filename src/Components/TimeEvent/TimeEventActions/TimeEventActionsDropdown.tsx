@@ -10,12 +10,14 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { TimeEvent } from '../types'
 import TimeEventListService from '@/Components/TimeEventList/TimeEventListService'
 import { useTimeEventsContext } from '@/Components/TimeEventList/TimeEventsProvider'
+import { useState } from 'react'
 
 type Props = {
     timeEvent: TimeEvent
 }
 export default function TimeEventActionsDropdown({ timeEvent }: Props) {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+    const { setCurrentlyEditedEvent } = useTimeEventsContext()
     const open = Boolean(anchorEl)
     const { timeEvents, setTimeEvents, setIsLoadingData } =
         useTimeEventsContext()
@@ -36,7 +38,9 @@ export default function TimeEventActionsDropdown({ timeEvent }: Props) {
         handleClose()
     }
 
-    const handleEditTimeEvent = () => {}
+    const handleEditTimeEvent = () => {
+        setCurrentlyEditedEvent(timeEvent)
+    }
 
     return (
         <React.Fragment>
@@ -103,7 +107,7 @@ export default function TimeEventActionsDropdown({ timeEvent }: Props) {
                     <RemoveCircleIcon sx={{ marginRight: '10px' }} /> Delete
                     Event
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={handleEditTimeEvent}>
                     <EditIcon sx={{ marginRight: '10px' }} /> Edit Event
                 </MenuItem>
             </Menu>

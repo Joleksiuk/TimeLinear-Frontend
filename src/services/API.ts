@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from 'axios'
-import { API_BASE_URL } from './APIConstants'
+import { API_BASE_URL, homepageURL } from './APIConstants'
+import { logout } from './AuthService'
 
 function getAuthHeader() {
     const userStr = localStorage.getItem('user')
     let user = null
     if (userStr) user = JSON.parse(userStr)
-    console.log(user)
 
     if (user && user.access_token) {
         return {
@@ -37,6 +37,8 @@ export async function request(
         const response = await axios(config)
         return response
     } catch (error) {
+        logout()
+        window.location.href = homepageURL + '/signIn'
         console.error('An error occurred:', error)
         throw error
     }

@@ -10,6 +10,7 @@ import { IconButtonContainerStyled } from './IconSearch.styled'
 type Props = {
     eventIcon: EventIcon | undefined
     setEventIcon: (value: EventIcon) => void
+    text?: string
 }
 
 const style = {
@@ -24,7 +25,11 @@ const style = {
     zindex: 1,
 }
 
-export default function IconSearchDialog({ eventIcon, setEventIcon }: Props) {
+export default function IconSearchDialog({
+    eventIcon,
+    setEventIcon,
+    text = 'Chosen icon:',
+}: Props) {
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
@@ -32,7 +37,7 @@ export default function IconSearchDialog({ eventIcon, setEventIcon }: Props) {
     return (
         <div>
             <IconButtonContainerStyled onClick={handleOpen}>
-                <Typography>Chosen icon:</Typography>
+                <Typography>{text}</Typography>
                 {<EventIconComponent eventIcon={eventIcon} />}
             </IconButtonContainerStyled>
 

@@ -8,14 +8,14 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions'
-import { TableCellStyled } from './TimeEventsListStyled'
 import { useTimeEventsContext } from './TimeEventsProvider'
 import CircularProgress from '@mui/material/CircularProgress'
-import TimeEventActionsDropdown from '../TimeEvent/TimeEventActions/TimeEventActionsDropdown'
-import EventIconComponent from '../IconSearch/EventIconComponent'
+import TimeEventListElement from './TimeEventListElement'
+import TimeEventListEditedElement from './TimeEventListEditedElement'
 
 export default function TimeEventsList() {
-    const { timeEvents, isLoadingData } = useTimeEventsContext()
+    const { timeEvents, isLoadingData, currentlyEditedEvent } =
+        useTimeEventsContext()
 
     const [page, setPage] = React.useState(0)
     const [rowsPerPage, setRowsPerPage] = React.useState(10)
@@ -61,38 +61,24 @@ export default function TimeEventsList() {
                                       page * rowsPerPage + rowsPerPage
                                   )
                                 : timeEvents
-                            ).map((row, index) => (
-                                <TableRow key={row.id}>
-                                    <TableCellStyled width="6%">
-                                        {index + page * rowsPerPage}
-                                    </TableCellStyled>
-                                    <TableCellStyled width="25%">
-                                        {row.name}
-                                    </TableCellStyled>
-                                    <TableCellStyled width="30%">
-                                        {row.description}
-                                    </TableCellStyled>
-                                    <TableCellStyled width="15%">
-                                        {row.startDate}
-                                    </TableCellStyled>
-                                    <TableCellStyled width="15%">
-                                        {row.endDate}
-                                    </TableCellStyled>
-                                    <TableCellStyled width="15%">
-                                        <EventIconComponent
-                                            eventIcon={{
-                                                type: row.iconType,
-                                                source: row.iconSource,
-                                            }}
-                                        />
-                                    </TableCellStyled>
-                                    <TableCellStyled width="15%">
-                                        <TimeEventActionsDropdown
-                                            timeEvent={row}
-                                        />
-                                    </TableCellStyled>
-                                </TableRow>
-                            ))}
+                            ).map((row, index) =>
+                                currentlyEditedEvent === null ||
+                                currentlyEditedEvent.id !== row.id ? (
+                                    <TimeEventListElement
+                                        timeEvent={row}
+                                        index={index}
+                                        page={page}
+                                        rowsPerPage={rowsPerPage}
+                                    />
+                                ) : (
+                                    <TimeEventListEditedElement
+                                        timeEvent={row}
+                                        index={index}
+                                        page={page}
+                                        rowsPerPage={rowsPerPage}
+                                    />
+                                )
+                            )}
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 53 * emptyRows }}>
                                     <TableCell colSpan={6} />

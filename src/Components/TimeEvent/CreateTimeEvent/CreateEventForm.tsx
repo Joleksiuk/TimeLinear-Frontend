@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 
-import { TextField, Button, Typography } from '@mui/material'
+import { TextField, Button, AlertTitle } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import {
-    ContainerStyled,
-    IconFormContainerStyled,
-} from './CreateEventForm.styled'
+import { DatePicker, DateTimePicker } from '@mui/x-date-pickers'
+import { ContainerStyled } from './CreateEventForm.styled'
 import { request } from '@/Services/API'
 import { TIME_EVENT_URL } from '@/Services/APIConstants'
 import Snackbar from '@mui/material/Snackbar'
@@ -38,12 +35,18 @@ export default function CreateEventForm({ isInModal = false }: Props) {
     const { timeEvents, setTimeEvents, setIsLoadingData } =
         useTimeEventsContext()
     const { addEventToTimeline } = useSingleTimelineContext()
-    const [date, setDate] = React.useState<Dayjs | null>(dayjs(Date.now()))
+    const [startDate, setStartDate] = React.useState<Dayjs | null>(
+        dayjs(Date.now())
+    )
+    const [endDate, setEndDate] = React.useState<Dayjs | null>(
+        dayjs(Date.now())
+    )
     const [eventName, setEventName] = useState('')
     const [description, setDescription] = useState('')
     const [eventAdded, setEventAdded] = useState(false)
     const [eventIcon, setEventIcon] = useState<EventIcon>()
     const [descriptionError, setDescriptionError] = useState(false)
+    const [dateError, setDateError] = useState(false)
     const [nameError, setNameError] = useState(false)
     const [openSnackbar, setOpenSnackbar] = React.useState(false)
 
@@ -58,13 +61,14 @@ export default function CreateEventForm({ isInModal = false }: Props) {
             setEventAdded(true)
             setDescriptionError(false)
             setNameError(false)
+            setDateError(false)
         } catch (error) {}
     }
 
     const addNewEvent = async (): Promise<TimeEvent> => {
         const requestData: CreateEventRequest = {
-            startDate: DateUtils.dayjsDateToString(date),
-            endDate: DateUtils.dayjsDateToString(date),
+            startDate: DateUtils.dayjsDateToString(startDate),
+            endDate: DateUtils.dayjsDateToString(endDate),
             name: eventName,
             description: description,
             iconType: eventIcon?.type,
@@ -77,7 +81,6 @@ export default function CreateEventForm({ isInModal = false }: Props) {
         updatedTimeEvents.push(newTimeEvent)
         setTimeEvents(updatedTimeEvents)
         setIsLoadingData(false)
-        console.log(newTimeEvent)
 
         return newTimeEvent
     }
@@ -93,7 +96,20 @@ export default function CreateEventForm({ isInModal = false }: Props) {
             setDescriptionError(true)
             wrongInput = true
         }
+
+        if (startDate?.isAfter(endDate)) {
+            wrongInput = true
+            setDateError(true)
+        }
         return wrongInput
+    }
+
+    const validateDates = (start: Dayjs | null, end: Dayjs | null) => {
+        if (start?.isAfter(end)) {
+            setDateError(true)
+            return
+        }
+        setDateError(false)
     }
 
     const handleClose = (
@@ -110,12 +126,31 @@ export default function CreateEventForm({ isInModal = false }: Props) {
         <form>
             <ContainerStyled>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        label="Controlled picker"
-                        value={date}
-                        onChange={(date) => setDate(date)}
+                    <DateTimePicker
+                        label="Start date"
+                        value={startDate}
+                        onChange={(date) => {
+                            setStartDate(date)
+                            validateDates(date, endDate)
+                        }}
                     />
                 </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateTimePicker
+                        label="End date"
+                        value={endDate}
+                        onChange={(date) => {
+                            setEndDate(date)
+                            validateDates(startDate, date)
+                        }}
+                    />
+                </LocalizationProvider>
+                {dateError && (
+                    <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        Start date must be later than end date
+                    </Alert>
+                )}
                 <TextField
                     label="Event Name"
                     value={eventName}
