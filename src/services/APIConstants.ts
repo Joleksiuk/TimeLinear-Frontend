@@ -1,4 +1,4 @@
-export const homepageURL = 'http://localhost:3000'
+export const homepageURL = 'https://timelinear-website.onrender.com:3000'
 export const API_BASE_URL = 'https://timelinear-server.onrender.com/api/v1'
 export const SIGN_UP_URL = 'auth/register'
 export const SIGN_IN_URL = 'auth/authenticate'
