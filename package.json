@@ -27,7 +27,7 @@
         "typescript": "^4.9.5"
     },
     "scripts": {
-        "start": "craco start",
+        "start": "PORT=8080 craco start",
         "build": "craco build",
         "test": "craco test",
         "eject": "craco eject",
