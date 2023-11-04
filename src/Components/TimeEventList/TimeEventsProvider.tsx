@@ -63,7 +63,7 @@ const TimeEventsProvider = ({ children }: Props) => {
             })
             setTimeEvents(updatedTimeEvents)
         } catch (error) {
-            console.err(error)
+            console.error(error)
         } finally {
             setIsLoadingData(false)
         }
