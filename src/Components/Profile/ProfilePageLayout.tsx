@@ -3,7 +3,7 @@ import AvatarUtils, { DiceBearAvatarCategory } from '@/Utils/User/AvatarUtils'
 import { useEffect, useState } from 'react'
 import { getCurrentUser } from '@/Services/AuthService'
 import { CircularProgress } from '@mui/material'
-import AvatarChangeDialog from '../Group/ChangeAvatar/AvatarChangeDialog'
+import AvatarChangeDialog from '@/Components/Group/ChangeAvatar/AvatarChangeDialog'
 
 type UserModel = {
     email: string
