@@ -1,11 +1,11 @@
 import React from 'react'
 import ViewListIcon from '@mui/icons-material/ViewList'
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import { useNavigate } from 'react-router-dom'
 import GroupIcon from '@mui/icons-material/Group'
 import { getCurrentUser } from '@/Services/AuthService'
+import TimelineIcon from '@mui/icons-material/Timeline'
 export default function DashboardSidebarItems() {
     const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ export default function DashboardSidebarItems() {
                             onClick={() => navigate('/timelinesList')}
                         >
                             <ListItemIcon>
-                                <AccessTimeIcon />
+                                <TimelineIcon />
                             </ListItemIcon>
                             <ListItemText primary="My timelines" />
                         </ListItemButton>

@@ -18,9 +18,62 @@ export default function HomepageLayout() {
             </Typography>
             <FlexContainer>
                 <HomepageImage
-                    height={'30%'}
-                    width={'30%'}
+                    height={500}
                     src="https://zapodaj.net/images/5a11a03b8236f.png"
+                    alt=""
+                />
+                <HomepageTextContainerStyled>
+                    <HomepageTextStyled>
+                        Your Ultimate Event Planning Companion! Plan, Visualize,
+                        and Share Your Events Like Never Before Are you tired of
+                        juggling multiple apps to manage your events? Say
+                        goodbye to the chaos and welcome the all-in-one solution
+                        that simplifies event planning
+                    </HomepageTextStyled>
+                </HomepageTextContainerStyled>
+                <HomepageImage
+                    height={800}
+                    src="https://zapodaj.net/images/bc34816f6183c.png"
+                    alt=""
+                />
+            </FlexContainer>
+            <FlexContainer>
+                <HomepageImage
+                    width={1000}
+                    src="https://zapodaj.net/images/a713df3141c5b.png"
+                    alt=""
+                />
+                <HomepageTextContainerStyled>
+                    <HomepageTextStyled>
+                        Using a calendar for event planning is essential for
+                        staying organized and managing your time effectively. A
+                        well-maintained calendar helps you avoid overlapping
+                        commitments, prepares you for upcoming events, and
+                        provides valuable reminders. It's a flexible tool,
+                        available in both digital and traditional formats,
+                        making it a must-have for staying on top of your
+                        schedule and ensuring you never miss an important
+                        moment.
+                    </HomepageTextStyled>
+                </HomepageTextContainerStyled>
+            </FlexContainer>
+            <FlexContainer>
+                <HomepageTextContainerStyled>
+                    <HomepageTextStyled>
+                        Browse through events assign them icons or edit them as
+                        you like!
+                    </HomepageTextStyled>
+                </HomepageTextContainerStyled>
+                <HomepageImage
+                    height={800}
+                    src="https://zapodaj.net/images/43380bbfd7ffc.png"
+                    alt=""
+                />
+            </FlexContainer>
+            <FlexContainer>
+                <HomepageImage
+                    height={800}
+                    src="https://zapodaj.net/images/52ef1b6c73d26.png"
                     alt=""
                 />
                 <HomepageTextContainerStyled>
@@ -36,40 +89,37 @@ export default function HomepageLayout() {
             <FlexContainer>
                 <HomepageTextContainerStyled>
                     <HomepageTextStyled>
-                        You can add events to timeline to visually present your
-                        plans!
+                        Managing groups with the ability to add people and
+                        assign them permissions is crucial for streamlining
+                        collaboration and maintaining security. Whether it's in
+                        the workplace, on social media, or within an
+                        organization, group management tools allow you to
+                        control access, delegate responsibilities, and
+                        facilitate efficient communication. By adding
+                        individuals and assigning specific permissions to them,
+                        you can ensure that the right people have the right
+                        level of access, making group collaboration more
+                        organized and secure
                     </HomepageTextStyled>
                 </HomepageTextContainerStyled>
                 <HomepageImage
-                    height={'40%'}
-                    width={'40%'}
-                    src="https://zapodaj.net/images/5b98740da19bf.png"
+                    width={1000}
+                    src="https://zapodaj.net/images/1cafedbe896fe.png"
                     alt=""
                 />
             </FlexContainer>
 
-            <HomepageTextContainerStyled>
-                <HomepageTextHeader>Timeline charts</HomepageTextHeader>
-                <HomepageTextStyled>
-                    Transform your events into stunning, interactive timeline
-                    charts. Watch your plans come to life with just a few
-                    clicks. Customize colors, labels, and milestones.
-                </HomepageTextStyled>
-            </HomepageTextContainerStyled>
-            <ImagesFlexContainer>
+            <FlexContainer>
+                <HomepageTextContainerStyled>
+                    <HomepageTextStyled>
+                        Browse through timelines!
+                    </HomepageTextStyled>
+                </HomepageTextContainerStyled>
                 <HomepageImage
-                    height={'50%'}
-                    width={'50%'}
-                    src="https://zapodaj.net/images/99133597d1cb6.png"
+                    src="https://zapodaj.net/images/5b98740da19bf.png"
                     alt=""
                 />
-                <HomepageImage
-                    height={'50%'}
-                    width={'50%'}
-                    src="https://zapodaj.net/images/271914fcb78af.png"
-                    alt=""
-                />
-            </ImagesFlexContainer>
+            </FlexContainer>
         </HomepageContainerStyled>
     )
 }

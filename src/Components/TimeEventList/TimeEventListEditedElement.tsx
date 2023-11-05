@@ -71,6 +71,7 @@ export default function TimeEventListEditedElement({
         updatedTimeEvent.iconSource = eventIcon?.source
         updatedTimeEvent.iconType = eventIcon?.type
 
+        console.log(updatedTimeEvent)
         updateTimeEvent(updatedTimeEvent)
         setCurrentlyEditedEvent(null)
     }

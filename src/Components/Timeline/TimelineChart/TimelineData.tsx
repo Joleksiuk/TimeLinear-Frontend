@@ -21,7 +21,7 @@ export default function TimelineData({ timelineEvent, display }: Props) {
                 display={display}
                 textFontSize={parameters.dataFontSize}
             >
-                {timelineEvent.date?.day()}-{timelineEvent.date?.month()}-
+                {timelineEvent.date?.date()}-{timelineEvent.date?.month()}-
                 {timelineEvent.date?.year()}
             </EventNameStyled>
             <DateStyled

@@ -1,86 +1,214 @@
-import React, { useEffect, useState } from 'react'
-import { BodyCell, CalendarTable, HeaderCellStyled } from './Calendar.styled'
-
-const daysOfWeek = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-]
-
-type BodyCellData = {
-    isMarked: boolean
-}
+import {
+    BodyCell,
+    CalendarTable,
+    HeaderCellStyled,
+    BodyCellContentContainer,
+    HeaderContainerStyled,
+} from './Calendar.styled'
+import { useTimeEventsContext } from '../TimeEventList/TimeEventsProvider'
+import dayjs from 'dayjs'
+import { TimeEvent } from '../TimeEvent/types'
+import EventIconComponent from '../IconSearch/EventIconComponent'
+import { Divider, IconButton, Tooltip, Typography } from '@mui/material'
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
+import { daysOfWeek, months } from './CalendarConstants'
+import { useState } from 'react'
+import { homepageURL } from '@/Services/APIConstants'
 
 export default function Calendar() {
     const today = new Date()
-    const currentYear = today.getFullYear()
-    const currentMonth = today.getMonth()
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
+    const [currentMonth, setCurrentMonth] = useState(today.getMonth())
+    const [currentYear, setCurrentYear] = useState(today.getFullYear())
 
-    const hoursOfDay = Array.from({ length: 24 }, (_, i) => `${i}:00`)
-    const [calendar, setCalendar] = useState<Array<Array<BodyCellData>>>([])
+    const changeMonth = (direction: number) => {
+        const currentDate = dayjs().year(currentYear).month(currentMonth)
+        const newDate = currentDate.add(direction, 'month')
 
-    function handleBodyCellClick(rowIndex: number, cellIndex: number) {
-        const updatedCalendar = [...calendar]
-        updatedCalendar[rowIndex][cellIndex].isMarked =
-            !updatedCalendar[rowIndex][cellIndex].isMarked
-        setCalendar(updatedCalendar)
+        setCurrentMonth(newDate.month())
+        setCurrentYear(newDate.year())
     }
 
-    useEffect(() => {
-        const tempCalendar = []
-        for (let hour = 0; hour < 24; hour++) {
-            const row: Array<BodyCellData> = []
-            for (let day = 1; day <= daysInMonth; day++) {
-                row.push({ isMarked: false })
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
+    const days = Array.from({ length: daysInMonth }, (_, i) => i + 1)
+
+    const { timeEvents } = useTimeEventsContext()
+
+    const isEventInTableCell = (
+        day: number,
+        event: TimeEvent,
+        currentYear: number,
+        currentMonth: number
+    ) => {
+        let eventStart = dayjs(event.startDate).set('second', 0)
+        eventStart = dayjs(eventStart).set('minute', 0)
+        eventStart = dayjs(eventStart).set('hour', 0)
+
+        let eventEnd = dayjs(event.endDate).set('second', 0)
+        eventEnd = dayjs(eventEnd).set('minute', 0)
+        eventEnd = dayjs(eventEnd).set('hour', 0)
+
+        const targetTime = dayjs(
+            `${currentYear}-${currentMonth + 1}-${day} 00:00:00`
+        )
+
+        return (
+            targetTime.isSame(eventStart) ||
+            targetTime.isSame(eventEnd) ||
+            (targetTime.isBefore(eventEnd) && targetTime.isAfter(eventStart))
+        )
+    }
+
+    const renderBodyCellsForRow = (timeEvent: TimeEvent) => {
+        const bodyCells: any = []
+        const cellIndices = new Set()
+
+        days.forEach((day, index) => {
+            if (cellIndices.has(index)) {
+                return
             }
-            tempCalendar.push(row)
-        }
-        setCalendar(tempCalendar)
-    }, [])
+
+            if (isEventInTableCell(day, timeEvent, currentYear, currentMonth)) {
+                let currentDay = day
+                const consecutiveMarkedDays = [day]
+                let colSpan = 1
+
+                while (
+                    index + colSpan < daysInMonth &&
+                    isEventInTableCell(
+                        currentDay + 1,
+                        timeEvent,
+                        currentYear,
+                        currentMonth
+                    )
+                ) {
+                    consecutiveMarkedDays.push(currentDay + 1)
+                    currentDay++
+                    colSpan++
+                }
+
+                const isIconOnly = colSpan <= 3
+
+                bodyCells.push(
+                    <BodyCell
+                        key={day}
+                        colSpan={colSpan}
+                        isMarked={true}
+                        style={{ width: `${(100 / daysInMonth) * colSpan}%` }}
+                        onClick={() => {
+                            window.open(
+                                homepageURL + `/timeEvent/${timeEvent.id}`,
+                                '_blank'
+                            )
+                        }}
+                    >
+                        <Tooltip title={timeEvent.name} arrow>
+                            <BodyCellContentContainer>
+                                <div
+                                    className={`content-container ${
+                                        isIconOnly ? 'icon-only' : ''
+                                    }`}
+                                >
+                                    {isIconOnly ? (
+                                        <EventIconComponent
+                                            eventIcon={{
+                                                source: timeEvent.iconSource,
+                                                type: timeEvent.iconType,
+                                            }}
+                                            style={{
+                                                height: '50px',
+                                                width: '50px',
+                                            }}
+                                        />
+                                    ) : (
+                                        <BodyCellContentContainer>
+                                            <Typography
+                                                sx={{ color: '#887a96ef' }}
+                                            >
+                                                {timeEvent.name}
+                                            </Typography>
+                                            <EventIconComponent
+                                                eventIcon={{
+                                                    source: timeEvent.iconSource,
+                                                    type: timeEvent.iconType,
+                                                }}
+                                                style={{
+                                                    height: '50px',
+                                                    width: '50px',
+                                                }}
+                                            />
+                                        </BodyCellContentContainer>
+                                    )}
+                                </div>
+                            </BodyCellContentContainer>
+                        </Tooltip>
+                    </BodyCell>
+                )
+
+                for (let i = index; i < index + colSpan; i++) {
+                    cellIndices.add(i)
+                }
+            } else {
+                bodyCells.push(
+                    <BodyCell key={day} colSpan={1} isMarked={false} />
+                )
+            }
+        })
+
+        return bodyCells
+    }
 
     return (
-        <CalendarTable>
-            <thead>
-                <tr>
-                    <HeaderCellStyled></HeaderCellStyled>
-                    {Array.from({ length: daysInMonth }, (_, i) => (
-                        <HeaderCellStyled key={i + 1}>
-                            {i + 1}
-                            <br />
-                            {daysOfWeek[
-                                new Date(
-                                    currentYear,
-                                    currentMonth,
-                                    i + 1
-                                ).getDay()
-                            ].substring(0, 3)}
-                        </HeaderCellStyled>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {calendar.map((row: Array<BodyCellData>, rowIndex: number) => (
-                    <tr key={rowIndex}>
-                        <HeaderCellStyled>
-                            {hoursOfDay[rowIndex]}
-                        </HeaderCellStyled>
-                        {row.map((cell: BodyCellData, cellIndex: number) => (
-                            <BodyCell
-                                key={cellIndex}
-                                isMarked={cell.isMarked}
-                                onClick={() =>
-                                    handleBodyCellClick(rowIndex, cellIndex)
-                                }
-                            />
+        <div>
+            <HeaderContainerStyled>
+                <IconButton
+                    edge="start"
+                    color="inherit"
+                    onClick={() => changeMonth(-1)}
+                >
+                    <KeyboardDoubleArrowLeftIcon />
+                </IconButton>
+                <IconButton
+                    edge="start"
+                    color="inherit"
+                    onClick={() => changeMonth(1)}
+                >
+                    <KeyboardDoubleArrowRightIcon />
+                </IconButton>
+            </HeaderContainerStyled>
+            <Divider
+                sx={{ marginBottom: '80px' }}
+                orientation="horizontal"
+                flexItem
+            >
+                {months[currentMonth]} {currentYear}
+            </Divider>
+            <CalendarTable key="calendar-table">
+                <thead>
+                    <tr>
+                        {Array.from({ length: daysInMonth }, (_, i) => (
+                            <HeaderCellStyled key={i + 1}>
+                                {i + 1}
+                                <br />
+                                {daysOfWeek[
+                                    new Date(
+                                        currentYear,
+                                        currentMonth,
+                                        i + 1
+                                    ).getDay()
+                                ].substring(0, 3)}
+                            </HeaderCellStyled>
                         ))}
                     </tr>
-                ))}
-            </tbody>
-        </CalendarTable>
+                </thead>
+                <tbody>
+                    {timeEvents.map((timeEvent) => (
+                        <tr key={timeEvent.id}>
+                            {renderBodyCellsForRow(timeEvent)}
+                        </tr>
+                    ))}
+                </tbody>
+            </CalendarTable>
+        </div>
     )
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const FlexContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 50px;
 `
 export const ImagesFlexContainer = styled.div`
@@ -20,6 +20,7 @@ export const HomepageContainerStyled = styled.div`
 export const HomepageTextStyled = styled.div`
     font-size: 20px;
     background-color: #362d42;
+    max-width: 500px;
     border-radius: 20px;
     padding: 20px;
     box-shadow:
@@ -58,8 +59,6 @@ export const HomepageImage = styled.img`
 
 export const HomepageImageMoved = styled.img`
     border-radius: 50px;
-    position: absolute;
-    margin-top: -200px;
     box-shadow:
         rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
         rgba(233, 109, 233, 0.15) 0px -36px 30px 0px inset,

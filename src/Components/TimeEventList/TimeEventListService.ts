@@ -12,10 +12,18 @@ export default {
         await request(`${TIME_EVENT_URL}/${timeEventId}`, 'DELETE')
     },
 
+    async getTimeEvent(timeEventId: number): Promise<TimeEvent> {
+        const response = await request(
+            `${TIME_EVENT_URL}/${timeEventId}`,
+            'GET'
+        )
+        return response.data
+    },
+
     async updateTimeEvent(timeEvent: TimeEvent): Promise<TimeEvent> {
         const response = await request(
             `${TIME_EVENT_URL}/${timeEvent.id}`,
-            'DELETE',
+            'PUT',
             timeEvent
         )
         return response.data

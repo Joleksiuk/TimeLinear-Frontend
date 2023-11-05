@@ -11,6 +11,7 @@ import EventsListPage from '@/Pages/TimeEventsListPage'
 import ChangePasswordPage from '@/Pages/ChangePasswordPage'
 import GroupsPage from '@/Pages/GroupsPage'
 import ProfilePage from '@/Pages/ProfilePage'
+import TimeEventPage from './Pages/TimeEventPage'
 
 export default function App() {
     return (
@@ -21,6 +22,10 @@ export default function App() {
                     <Route
                         path="timeline/:timelineId"
                         element={<TimelinePage />}
+                    />
+                    <Route
+                        path="timeEvent/:timeEventId"
+                        element={<TimeEventPage />}
                     />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="signin" element={<SignIn />} />

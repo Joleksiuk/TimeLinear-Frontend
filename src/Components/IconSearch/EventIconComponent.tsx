@@ -35,7 +35,7 @@ export default function EventIconComponent({
                 },
             }
         }
-        return <div></div>
+        return <div>None</div>
     }
     return <>{display ? getChosenIcon() : <div style={defaultStyle}></div>}</>
 }
