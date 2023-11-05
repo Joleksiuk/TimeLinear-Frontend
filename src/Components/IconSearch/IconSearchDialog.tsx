@@ -1,4 +1,4 @@
-import { Backdrop, Box, Fade, Modal, Typography } from '@mui/material'
+import { Backdrop, Box, Button, Fade, Modal, Typography } from '@mui/material'
 import React from 'react'
 import EventIconComponent from './EventIconComponent'
 import { IconFormContainerStyled } from '../TimeEvent/CreateTimeEvent/CreateEventForm.styled'
@@ -36,9 +36,11 @@ export default function IconSearchDialog({
 
     return (
         <div>
-            <IconButtonContainerStyled onClick={handleOpen}>
-                <Typography>{text}</Typography>
-                {<EventIconComponent eventIcon={eventIcon} />}
+            <IconButtonContainerStyled>
+                <Button variant="outlined" onClick={handleOpen}>
+                    <Typography>{text}</Typography>
+                    {<EventIconComponent eventIcon={eventIcon} />}
+                </Button>
             </IconButtonContainerStyled>
 
             <Modal

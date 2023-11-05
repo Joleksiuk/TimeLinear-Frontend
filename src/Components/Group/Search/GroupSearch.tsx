@@ -1,6 +1,5 @@
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import { useEffect, useState } from 'react'
 import { Group } from '../GroupTypes'
 import { useGroupsContext } from '../GroupsProvider'
 import { TimelineModel } from '@/Components/Timeline/TimelineProvider/types'

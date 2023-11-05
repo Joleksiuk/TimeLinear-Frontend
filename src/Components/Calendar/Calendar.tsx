@@ -93,7 +93,6 @@ export default function Calendar() {
                     <BodyCell
                         key={day}
                         colSpan={colSpan}
-                        isMarked={true}
                         style={{ width: `${(100 / daysInMonth) * colSpan}%` }}
                         onClick={() => {
                             window.open(
@@ -101,8 +100,14 @@ export default function Calendar() {
                                 '_blank'
                             )
                         }}
+                        categoryColor={timeEvent.category?.color || '#887a96ef'}
                     >
-                        <Tooltip title={timeEvent.name} arrow>
+                        <Tooltip
+                            title={
+                                timeEvent.name + ' - ' + timeEvent.description
+                            }
+                            arrow
+                        >
                             <BodyCellContentContainer>
                                 <div
                                     className={`content-container ${
@@ -150,7 +155,7 @@ export default function Calendar() {
                 }
             } else {
                 bodyCells.push(
-                    <BodyCell key={day} colSpan={1} isMarked={false} />
+                    <BodyCell key={day} colSpan={1} categoryColor={'#121529'} />
                 )
             }
         })

@@ -1,5 +1,6 @@
 import { Group } from '@/Components/Group/GroupTypes'
 import { TimeEvent } from '../../TimeEvent/types'
+import { CategoryModel } from '@/Components/Category/Category.types'
 
 export type TimelineModel = {
     id: number
@@ -9,6 +10,7 @@ export type TimelineModel = {
     timeEvents: Array<TimeEvent>
     group: Group
     ownerEmail: string
+    category: CategoryModel | null
 }
 
 export type TimelinePostRequest = {

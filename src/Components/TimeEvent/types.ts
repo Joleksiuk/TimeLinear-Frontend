@@ -1,3 +1,5 @@
+import { CategoryModel } from '../Category/Category.types'
+
 export type CreateEventRequest = {
     name: string
     description: string
@@ -5,6 +7,7 @@ export type CreateEventRequest = {
     endDate: string | undefined
     iconType?: 'emoji' | 'icon'
     iconSource?: string
+    category: CategoryModel | null
 }
 
 export type CreateEventResponse = {}
@@ -17,6 +20,7 @@ export type TimeEvent = {
     endDate: string
     iconType?: 'emoji' | 'icon'
     iconSource?: string
+    category: CategoryModel | null
 }
 
 export type TimeEventsBulkResponse = {

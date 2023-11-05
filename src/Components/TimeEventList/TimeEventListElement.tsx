@@ -3,6 +3,7 @@ import EventIconComponent from '../IconSearch/EventIconComponent'
 import TimeEventActionsDropdown from '../TimeEvent/TimeEventActions/TimeEventActionsDropdown'
 import { TimeEvent } from '../TimeEvent/types'
 import { TableCellStyled } from './TimeEventsListStyled'
+import CategoryComponent from '../Category/CategoryComponent'
 
 type Props = {
     timeEvent: TimeEvent
@@ -35,6 +36,9 @@ export default function TimeEventListElement({
                         source: timeEvent.iconSource,
                     }}
                 />
+            </TableCellStyled>
+            <TableCellStyled width="15%">
+                <CategoryComponent category={timeEvent.category} />
             </TableCellStyled>
             <TableCellStyled width="15%">
                 <TimeEventActionsDropdown timeEvent={timeEvent} />

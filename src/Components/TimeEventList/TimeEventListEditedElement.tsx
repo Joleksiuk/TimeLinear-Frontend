@@ -24,6 +24,9 @@ import {
 } from '@mui/x-date-pickers'
 import IconSearchDialog from '../IconSearch/IconSearchDialog'
 import { EventIcon } from '../IconSearch/types'
+import { CategoryModel } from '../Category/Category.types'
+import CategoryComponent from '../Category/CategoryComponent'
+import CategoryEditComponent from '../Category/CategoryEditComponent'
 
 type Props = {
     timeEvent: TimeEvent
@@ -44,6 +47,10 @@ export default function TimeEventListEditedElement({
     const { setCurrentlyEditedEvent, updateTimeEvent } = useTimeEventsContext()
     const [editedName, setEditedName] = useState<string>(timeEvent.name)
     const [descriptionError, setDescriptionError] = useState(false)
+    const [category, setCategory] = useState<CategoryModel | null>(
+        timeEvent.category
+    )
+    const [categoryError, setCategoryError] = useState<boolean>(false)
     const [dateError, setDateError] = useState(false)
     const [eventIcon, setEventIcon] = useState<EventIcon>({
         source: timeEvent.iconSource,
@@ -67,11 +74,10 @@ export default function TimeEventListEditedElement({
         updatedTimeEvent.startDate =
             DateUtils.dayjsDateToString(startDate) || updatedTimeEvent.startDate
         updatedTimeEvent.endDate =
-            DateUtils.dayjsDateToString(startDate) || updatedTimeEvent.endDate
+            DateUtils.dayjsDateToString(endDate) || updatedTimeEvent.endDate
         updatedTimeEvent.iconSource = eventIcon?.source
         updatedTimeEvent.iconType = eventIcon?.type
-
-        console.log(updatedTimeEvent)
+        updatedTimeEvent.category = category
         updateTimeEvent(updatedTimeEvent)
         setCurrentlyEditedEvent(null)
     }
@@ -165,6 +171,12 @@ export default function TimeEventListEditedElement({
                     eventIcon={eventIcon}
                     setEventIcon={setEventIcon}
                     text=""
+                />
+            </TableCellStyled>
+            <TableCellStyled width="15%">
+                <CategoryEditComponent
+                    category={timeEvent.category}
+                    setCategory={setCategory}
                 />
             </TableCellStyled>
             <TableCellStyled width="15%">

@@ -5,6 +5,8 @@ import {
     TimeEventPageContainer,
 } from './TimeEventPageLayout.styled'
 import EventIconComponent from '@/Components/IconSearch/EventIconComponent'
+import CategoryComponent from '@/Components/Category/CategoryComponent'
+import { ColorCircle } from '@/Components/Category/CreateCategory.styled'
 
 export default function TimeEventPageLayout() {
     const { timeEvent, isLoadingData } = useSingleTimeEventContext()
@@ -46,7 +48,21 @@ export default function TimeEventPageLayout() {
                     >
                         {timeEvent.description}
                     </Typography>
-
+                    <Divider orientation="horizontal" flexItem>
+                        Category
+                    </Divider>
+                    <>
+                        {timeEvent.category === null ? (
+                            <Typography>None</Typography>
+                        ) : (
+                            <>
+                                <Typography>{timeEvent.name}</Typography>
+                                <ColorCircle
+                                    categoryColor={timeEvent.category.color}
+                                />
+                            </>
+                        )}
+                    </>
                     <Divider orientation="horizontal" flexItem>
                         Date
                     </Divider>

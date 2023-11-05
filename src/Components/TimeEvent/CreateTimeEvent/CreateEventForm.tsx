@@ -16,6 +16,9 @@ import { useSingleTimelineContext } from '@/Components/Timeline/TimelineProvider
 import DateUtils from '@/Utils/DateUtils'
 import { EventIcon } from '@/Components/IconSearch/types'
 import IconSearchDialog from '@/Components/IconSearch/IconSearchDialog'
+import CreateCategory from '@/Components/Category/CreateCategory'
+import CreateCategoryDialog from '@/Components/Category/CreateCategoryDialog'
+import { CategoryModel } from '@/Components/Category/Category.types'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     function Alert(props, ref) {
@@ -48,8 +51,8 @@ export default function CreateEventForm({ isInModal = false }: Props) {
     const [descriptionError, setDescriptionError] = useState(false)
     const [dateError, setDateError] = useState(false)
     const [nameError, setNameError] = useState(false)
-    const [openSnackbar, setOpenSnackbar] = React.useState(false)
-
+    const [openSnackbar, setOpenSnackbar] = useState(false)
+    const [category, setCategory] = useState<CategoryModel | null>(null)
     const handleAddEvent = async () => {
         if (isDataInvalid()) {
             return
@@ -73,6 +76,7 @@ export default function CreateEventForm({ isInModal = false }: Props) {
             description: description,
             iconType: eventIcon?.type,
             iconSource: eventIcon?.source,
+            category: category,
         }
         setIsLoadingData(true)
         const response = await request(TIME_EVENT_URL, 'POST', requestData)
@@ -180,6 +184,10 @@ export default function CreateEventForm({ isInModal = false }: Props) {
                 <IconSearchDialog
                     eventIcon={eventIcon}
                     setEventIcon={setEventIcon}
+                />
+                <CreateCategoryDialog
+                    category={category}
+                    setCategory={setCategory}
                 />
                 <Button
                     variant="contained"

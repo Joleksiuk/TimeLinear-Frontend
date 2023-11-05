@@ -13,7 +13,7 @@ export const HeaderCellStyled = styled.th`
 `
 
 type BodyCellProps = {
-    isMarked: boolean
+    categoryColor: string
 }
 
 export const BodyCellContentContainer = styled.div`
@@ -25,13 +25,13 @@ export const BodyCellContentContainer = styled.div`
 `
 
 export const BodyCell = styled.td<BodyCellProps>`
+    background-color: ${(props) => props?.categoryColor || '#887a96ef'};
     padding: 8px;
     text-align: center;
     border: 1px solid #23263d;
     width: 40px !important;
     height: 80px !important;
     overflow: hidden;
-    background-color: ${(props) => (props.isMarked ? '#2d2d44' : '#121529')};
     border-radius: 15px;
     box-shadow:
         rgba(0, 0, 0, 0.3) 0px 19px 38px,

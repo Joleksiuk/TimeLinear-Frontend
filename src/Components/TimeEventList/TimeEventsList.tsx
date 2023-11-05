@@ -53,6 +53,8 @@ export default function TimeEventsList() {
                             <TableCell component="th">Description</TableCell>
                             <TableCell component="th">Start Date</TableCell>
                             <TableCell component="th">End Date</TableCell>
+                            <TableCell component="th">Icon</TableCell>
+                            <TableCell component="th">Category</TableCell>
                             <TableCell component="th"></TableCell>
 
                             {(rowsPerPage > 0
@@ -93,7 +95,7 @@ export default function TimeEventsList() {
                                         25,
                                         { label: 'All', value: -1 },
                                     ]}
-                                    colSpan={3}
+                                    colSpan={7}
                                     count={timeEvents.length}
                                     rowsPerPage={rowsPerPage}
                                     page={page}
